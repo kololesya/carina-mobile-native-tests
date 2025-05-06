@@ -1,5 +1,5 @@
 import laba.pages.LoginPage;
-import laba.pages.ProductsPage;
+import laba.pages.ProductsListPage;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -25,12 +25,12 @@ public class LoginTest extends BaseTest {
     public void testLoginScenarios(String username, String password, boolean shouldLoginSucceed, String expectedErrorMsgKey) {
         LoginPage loginPage = new LoginPage(getDriver());
         Assert.assertTrue(loginPage.isPageOpened(), "Login page is not loaded!");
-        ProductsPage productsPage = loginPage.login(
+        ProductsListPage productListPage = loginPage.login(
                 username.isEmpty() ? "" : R.TESTDATA.getDecrypted(username),
                 password.isEmpty() ? "" : R.TESTDATA.getDecrypted(password)
         );
         if (shouldLoginSucceed) {
-            Assert.assertTrue(productsPage.isPageOpened(), "Products page should be opened for valid credentials.");
+            Assert.assertTrue(productListPage.isPageOpened(), "Products page should be opened for valid credentials.");
         } else {
             Assert.assertTrue(loginPage.isErrorMessagePresent(), "Error message should be displayed.");
             if (expectedErrorMsgKey != null && !expectedErrorMsgKey.isEmpty()) {
