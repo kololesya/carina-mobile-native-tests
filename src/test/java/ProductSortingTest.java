@@ -3,7 +3,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import laba.constants.SortType;
-import laba.pages.ProductsListPage;
+import laba.basePages.ProductsListPage;
 import services.ProductSortingService;
 
 public class ProductSortingTest extends BaseTest {
@@ -17,6 +17,7 @@ public class ProductSortingTest extends BaseTest {
                 { SortType.PRICE_HIGH_TO_LOW }
         };
     }
+
     @Test(dataProvider = "sortingOptions")
     public void testProductSorting(SortType sortType) {
         ProductsListPage productsPage = loginAsStandardUser();

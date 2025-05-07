@@ -1,4 +1,6 @@
-package laba.pages;
+package laba.androidPages;
+
+import laba.basePages.BasePage;
 
 import java.util.List;
 
