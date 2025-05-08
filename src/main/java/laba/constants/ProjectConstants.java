@@ -1,7 +1,7 @@
 package laba.constants;
 
 public class ProjectConstants {
-    public static final String SAUCE_LABS_BACKPACK = "Sauce Labs Backpack";
+    public static final String SAUCE_LABS_ONESIE = "Sauce Labs Onesie";
 
     public static final int EXPECTED_CART_BADGE_COUNT = 1;
 
@@ -10,4 +10,11 @@ public class ProjectConstants {
     public static final String LAST_NAME = "Doe";
 
     public static final String ZIP_CODE = "12345";
+
+    public static final int MAX_SCROLL_ATTEMPTS = 10;
+
+    public static final int SWIPE_DURATION = 600;
+
+    public static final int SWIPE_STEPS = 2;
+
 }

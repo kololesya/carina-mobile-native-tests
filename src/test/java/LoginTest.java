@@ -1,40 +1,42 @@
-import laba.androidPages.LoginPageAndroid;
-import laba.basePages.ProductsListPage;
-
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.zebrunner.carina.utils.R;
+import laba.basePages.LoginPageBase;
+import laba.basePages.ProductsListPage;
+import laba.model.User;
+import laba.model.UserRepository;
+
+import static laba.constants.ErrorMessages.*;
 
 public class LoginTest extends BaseTest {
 
     @DataProvider(name = "loginData")
     public Object[][] loginData() {
         return new Object[][] {
-                {"user.standard", "password.valid", true, ""},
-                {"user.locked", "password.valid", false, "Sorry, this user has been locked out."},
-                {"user.problem", "password.valid", true, ""},
-                {"", "password.valid", false, "Username is required"},
-                {"user.standard", "", false, "Password is required"},
-                {"user.invalid", "password.invalid", false, "Username and password do not match any user in this service."}
+                {UserRepository.getStandardUser(), true, ""},
+                {UserRepository.getLockedUser(), false, USER_LOCKED_OUT},
+                {UserRepository.getProblemUser(), true, ""},
+                {UserRepository.getEmptyUsername(), false, USERNAME_REQUIRED},
+                {UserRepository.getEmptyPassword(), false, PASSWORD_REQUIRED},
+                {UserRepository.getInvalidUser(), false, INVALID_CREDENTIALS}
         };
     }
 
     @Test(dataProvider = "loginData")
-    public void testLoginScenarios(String username, String password, boolean shouldLoginSucceed, String expectedErrorMsgKey) {
-        LoginPageAndroid loginPage = new LoginPageAndroid(getDriver());
+    public void testLoginScenarios(User user, boolean shouldLoginSucceed, String expectedErrorMessage) {
+        LoginPageBase loginPage = initPage(LoginPageBase.class);
         Assert.assertTrue(loginPage.isPageOpened(), "Login page is not loaded!");
         ProductsListPage productListPage = loginPage.login(
-                username.isEmpty() ? "" : R.TESTDATA.getDecrypted(username),
-                password.isEmpty() ? "" : R.TESTDATA.getDecrypted(password)
+                user.getUsername(),
+                user.getPassword()
         );
         if (shouldLoginSucceed) {
-            Assert.assertTrue(productListPage.isPageOpened(), "Products page should be opened for valid credentials.");
+            Assert.assertTrue(productListPage.getHeaderMenu().isCartIconPresent(), "Login was not successful");
         } else {
             Assert.assertTrue(loginPage.isErrorMessagePresent(), "Error message should be displayed.");
-            if (expectedErrorMsgKey != null && !expectedErrorMsgKey.isEmpty()) {
-                Assert.assertTrue(loginPage.getErrorMessageText().contains(expectedErrorMsgKey),
+            if (expectedErrorMessage != null && !expectedErrorMessage.isEmpty()) {
+                Assert.assertTrue(loginPage.getErrorMessageText().contains(expectedErrorMessage),
                         "Expected error message not found. Actual: " + loginPage.getErrorMessageText());
             }
         }

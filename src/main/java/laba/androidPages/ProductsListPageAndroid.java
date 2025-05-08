@@ -1,6 +1,7 @@
 package laba.androidPages;
 
 import java.util.*;
+import java.util.function.Function;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -16,6 +17,9 @@ import laba.components.FooterComponent;
 import laba.components.ProductComponent;
 import laba.model.Product;
 
+
+import static laba.constants.ProjectConstants.*;
+
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = ProductsListPage.class)
 public class ProductsListPageAndroid extends ProductsListPage implements IMobileUtils {
     @ExtendedFindBy(accessibilityId = "test-PRODUCTS")
@@ -29,9 +33,6 @@ public class ProductsListPageAndroid extends ProductsListPage implements IMobile
 
     @FindBy(xpath = "//android.view.ViewGroup[@content-desc='test-Item']")
     private List<ProductComponent> productComponentList;
-
-    @FindBy(xpath = "//android.view.ViewGroup[@content-desc='test-Cart']//android.widget.TextView")
-    private ExtendedWebElement cartBadge;
 
     @FindBy(xpath = "//android.view.ViewGroup[.//android.widget.TextView[contains(@text,'All Rights Reserved')]]")
     private FooterComponent footerContainer;
@@ -50,64 +51,69 @@ public class ProductsListPageAndroid extends ProductsListPage implements IMobile
         return productComponentList;
     }
 
-    public LoginPageAndroid logout() {
-        getHeaderMenu().openMenu();
+    @Override
+    public LoginPageBaseAndroid logout() {
+        getHeaderMenu().openHeaderMenu();
         getHeaderMenu().logoutButtonClick();
-        return new LoginPageAndroid(getDriver());
+        return new LoginPageBaseAndroid(getDriver());
     }
 
     @Override
     public List<String> getAllProductNames() {
-        Set<String> uniqueNames = new LinkedHashSet<>();
-        int safetyCounter = 10;
-        while (!getFooter().isVisible() && safetyCounter-- > 0) {
-            for (ProductComponent productItem : getProductItems()) {
-                uniqueNames.add(productItem.getProductName());
-            }
-            swipe(getFooter().getAllRightsReservedLabel(), Direction.UP, 2, 600);
-        }
-        return new ArrayList<>(uniqueNames);
+        return collectProductValues(ProductComponent::getProductName);
     }
 
     @Override
     public List<Double> getAllProductPrices() {
-        Set<Double> uniquePrices = new LinkedHashSet<>();
-        int safetyCounter = 10;
-        while (!getFooter().isVisible() && safetyCounter-- > 0) {
-            for (ProductComponent productItem : getProductItems()) {
-                String raw = productItem.getProductPrice();
-                String clean = raw.replaceAll("[^\\d.,]", "").replace(",", ".");
-                uniquePrices.add(Double.parseDouble(clean));
-            }
-            swipe(getFooter().getAllRightsReservedLabel(), Direction.UP, 2, 600);
-        }
-        return new ArrayList<>(uniquePrices);
+        return collectProductValues(pc ->
+                Double.parseDouble(
+                        pc.getProductPrice()
+                                .replaceAll("[^\\d.,]", "")
+                                .replace(",", ".")
+                )
+        );
     }
 
+    @Override
     public boolean areAllProductNamesVisible() {
-        List<Product> uniqueProducts = new ArrayList<>();
-        while (!getFooter().isVisible()) {
-            for (ProductComponent productItem : getProductItems()) {
-                Product product = productItem.toModel();
-                boolean isNew = uniqueProducts.stream()
-                        .noneMatch(p -> p.getProductTitle().equals(product.getProductTitle()));
-                if (isNew) {
-                    uniqueProducts.add(product);
-                }
-            }
-            swipe(getFooter().getAllRightsReservedLabel(), Direction.UP, 2, 600);
-        }
-        return uniqueProducts.stream()
+        List<Product> products = collectAllProducts();
+        return products.stream()
                 .allMatch(p -> p.getProductTitle() != null && !p.getProductTitle().isEmpty()
                         && p.getProductPrice() > 0);
     }
 
+    private List<Product> collectAllProducts() {
+        Set<String> seenTitles = new HashSet<>();
+        List<Product> collected = new ArrayList<>();
+
+        while (!getFooter().isVisible()) {
+            for (ProductComponent item : getProductItems()) {
+                Product product = item.toModel();
+                if (seenTitles.add(product.getProductTitle())) {
+                    collected.add(product);
+                }
+            }
+            swipeUpToFooter();
+        }
+
+        return collected;
+    }
+
+    @Override
     public void addProductToCartByName(String productName) {
-        ProductComponent item = getProductItems().stream()
-                .filter(p -> p.getProductName().equalsIgnoreCase(productName))
-                .findFirst()
-                .orElseThrow(() -> new IllegalStateException("Product not found: " + productName));
-        item.clickAddToCart();
+        int safetyCounter = MAX_SCROLL_ATTEMPTS;
+        while (safetyCounter-- > 0) {
+            Optional<ProductComponent> target = getProductItems().stream()
+                    .filter(p -> p.getProductName().equalsIgnoreCase(productName))
+                    .findFirst();
+            if (target.isPresent()) {
+                target.get().clickAddToCart();
+                return;
+            }
+            if (getFooter().isVisible()) break;
+            swipeUpToFooter();
+        }
+        throw new IllegalStateException("Product not found after scrolling: " + productName);
     }
 
     @Override
@@ -116,24 +122,24 @@ public class ProductsListPageAndroid extends ProductsListPage implements IMobile
         sortOption.format(option).click();
     }
 
+    @Override
     public void resetAppState() {
-        getHeaderMenu().openMenu();
+        getHeaderMenu().openHeaderMenu();
         getHeaderMenu().resetAppState();
     }
 
-    public boolean isCartBadgeWithCount(int expectedCount) {
-        if (!cartBadge.isElementPresent(5)) {
-            return expectedCount == 0;
-        }
-        return cartBadge.getText().trim().equals(String.valueOf(expectedCount));
+    private void swipeUpToFooter() {
+        swipe(getFooter().getAllRightsReservedLabel(), Direction.UP, SWIPE_STEPS, SWIPE_DURATION);
     }
 
-    public void swipeUntilVisible(ExtendedWebElement element, int maxSwipes) {
-        int attempts = 0;
-        while (!element.isElementPresent(1) && attempts < maxSwipes) {
-            swipe(500, 1500, 500, 500, 1000);
-            attempts++;
-            pause(1);
+    private <T> List<T> collectProductValues(Function<ProductComponent, T> extractor) {
+        Set<T> uniqueValues = new LinkedHashSet<>();
+        while (!getFooter().isVisible()) {
+            for (ProductComponent productItem : getProductItems()) {
+                uniqueValues.add(extractor.apply(productItem));
+            }
+            swipeUpToFooter();
         }
+        return new ArrayList<>(uniqueValues);
     }
 }

@@ -9,11 +9,11 @@ import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
-import laba.basePages.LoginPage;
+import laba.basePages.LoginPageBase;
 import laba.basePages.ProductsListPage;
 
-@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = laba.basePages.LoginPage.class)
-public class LoginPageAndroid extends LoginPage implements IMobileUtils {
+@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = LoginPageBase.class)
+public class LoginPageBaseAndroid extends LoginPageBase implements IMobileUtils {
 
     @ExtendedFindBy(accessibilityId = "test-Username")
     private ExtendedWebElement usernameField;
@@ -27,7 +27,7 @@ public class LoginPageAndroid extends LoginPage implements IMobileUtils {
     @FindBy(xpath = "//*[@content-desc='test-Error message']/android.widget.TextView")
     private ExtendedWebElement errorMessageText;
 
-    public LoginPageAndroid(WebDriver driver) {
+    public LoginPageBaseAndroid (WebDriver driver) {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(loginButton);
