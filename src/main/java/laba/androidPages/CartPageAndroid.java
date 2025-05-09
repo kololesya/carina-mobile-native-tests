@@ -25,7 +25,7 @@ public class CartPageAndroid extends CartPageBase {
     @ExtendedFindBy(accessibilityId = "test-CHECKOUT")
     private ExtendedWebElement checkoutButton;
 
-    @FindBy(xpath = "//android.view.ViewGroup[.//*[@content-desc='test-Menu'] and .//*[@content-desc='test-Cart']]")
+    @FindBy(xpath = "//*[@content-desc='test-Menu']/..")
     private AndroidHeaderMenuComponent headerMenu;
 
     @FindBy(xpath = "//android.view.ViewGroup[.//android.widget.TextView[contains(@text,'All Rights Reserved')]]")
