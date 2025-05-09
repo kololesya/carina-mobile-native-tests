@@ -1,15 +1,15 @@
-import laba.pages.LoginPage;
-import laba.pages.ProductsPage;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import laba.basePages.LoginPageBase;
+import laba.basePages.ProductsListPage;
 
 public class LogoutTest extends BaseTest {
     @Test
     public void testLogout() {
-        ProductsPage productsPage = loginAsStandardUser();
+        ProductsListPage productsPage = loginAsStandardUser();
         Assert.assertTrue(productsPage.isPageOpened(), "Products page is opened after login.");
-        LoginPage loginPage = productsPage.logout();
-        Assert.assertTrue(loginPage.isPageOpened(), "Login page is opened after logout.");
+        LoginPageBase loginPageBase = productsPage.logout();
+        Assert.assertTrue(loginPageBase.isPageOpened(), "Login page is opened after logout.");
     }
 }
