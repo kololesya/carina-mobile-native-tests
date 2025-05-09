@@ -13,7 +13,7 @@ import laba.basePages.LoginPageBase;
 import laba.basePages.ProductsListPage;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = LoginPageBase.class)
-public class LoginPageBaseAndroid extends LoginPageBase implements IMobileUtils {
+public class LoginPageAndroid extends LoginPageBase implements IMobileUtils {
 
     @ExtendedFindBy(accessibilityId = "test-Username")
     private ExtendedWebElement usernameField;
@@ -24,10 +24,10 @@ public class LoginPageBaseAndroid extends LoginPageBase implements IMobileUtils 
     @ExtendedFindBy(accessibilityId = "test-LOGIN")
     private ExtendedWebElement loginButton;
 
-    @FindBy(xpath = "//*[@content-desc='test-Error message']/android.widget.TextView")
+    @FindBy(xpath = "//android.view.ViewGroup[@content-desc='test-Error message']/android.widget.TextView")
     private ExtendedWebElement errorMessageText;
 
-    public LoginPageBaseAndroid (WebDriver driver) {
+    public LoginPageAndroid (WebDriver driver) {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(loginButton);

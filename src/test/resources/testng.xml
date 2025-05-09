@@ -1,6 +1,5 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="Mobile Suite" verbose="1" parallel="tests" thread-count="1">
-    <parameter name="config" value="_config.local.properties"/>
     <test name="MobileTest">
         <classes>
             <class name="LoginTest"/>

@@ -32,7 +32,7 @@ public class LoginTest extends BaseTest {
                 user.getPassword()
         );
         if (shouldLoginSucceed) {
-            Assert.assertTrue(productListPage.getHeaderMenu().isCartIconPresent(), "Login was not successful");
+            Assert.assertTrue(productListPage.isPageOpened(), "Login was not successful");
         } else {
             Assert.assertTrue(loginPage.isErrorMessagePresent(), "Error message should be displayed.");
             if (expectedErrorMessage != null && !expectedErrorMessage.isEmpty()) {

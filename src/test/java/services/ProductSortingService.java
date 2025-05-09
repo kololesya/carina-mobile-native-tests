@@ -20,17 +20,17 @@ public class ProductSortingService {
             case NAME_A_TO_Z:
             case NAME_Z_TO_A:
                 List<String> names = productsPage.getAllProductNames();
-                return isSorted(names, sortType);
+                return isSortedProductList(names, sortType);
             case PRICE_LOW_TO_HIGH:
             case PRICE_HIGH_TO_LOW:
                 List<Double> prices = productsPage.getAllProductPrices();
-                return isSorted(prices, sortType);
+                return isSortedProductList(prices, sortType);
             default:
                 throw new IllegalArgumentException("Unexpected sort type: " + sortType);
         }
     }
 
-    private <T extends Comparable<T>> boolean isSorted(List<T> list, SortType sortType) {
+    private <T extends Comparable<T>> boolean isSortedProductList (List<T> list, SortType sortType) {
         List<T> sorted = new ArrayList<>(list);
         switch (sortType) {
             case NAME_A_TO_Z:

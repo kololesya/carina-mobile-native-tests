@@ -13,15 +13,22 @@ import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
 import laba.basePages.ProductsListPage;
-import laba.components.FooterComponent;
-import laba.components.ProductComponent;
+import laba.components.android.AndroidFooterComponent;
+import laba.components.android.AndroidHeaderMenuComponent;
+import laba.components.android.AndroidProductComponent;
+import laba.components.android.AndroidSideMenuComponent;
+import laba.constants.MenuButtons;
 import laba.model.Product;
-
+import laba.basePages.LoginPageBase;
 
 import static laba.constants.ProjectConstants.*;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = ProductsListPage.class)
 public class ProductsListPageAndroid extends ProductsListPage implements IMobileUtils {
+
+    @FindBy(xpath = "//*[@content-desc='test-Menu']/..")
+    private AndroidHeaderMenuComponent headerMenu;
+
     @ExtendedFindBy(accessibilityId = "test-PRODUCTS")
     private ExtendedWebElement title;
 
@@ -31,11 +38,14 @@ public class ProductsListPageAndroid extends ProductsListPage implements IMobile
     @FindBy(xpath = "//android.widget.TextView[@text='%s']")
     private ExtendedWebElement sortOption;
 
-    @FindBy(xpath = "//android.view.ViewGroup[@content-desc='test-Item']")
-    private List<ProductComponent> productComponentList;
+    @ExtendedFindBy(accessibilityId = "test-Item")
+    private List<AndroidProductComponent> androidProductComponentList;
 
-    @FindBy(xpath = "//android.view.ViewGroup[.//android.widget.TextView[contains(@text,'All Rights Reserved')]]")
-    private FooterComponent footerContainer;
+    @FindBy(xpath = "//android.widget.TextView[contains(@text, 'Sauce Labs. All Rights Reserved')]")
+    private AndroidFooterComponent footerContainer;
+
+    @FindBy(xpath = "//android.view.ViewGroup[.//*[@content-desc='test-LOGOUT']]")
+    private AndroidSideMenuComponent sideMenuContainer;
 
     public ProductsListPageAndroid(WebDriver driver) {
         super(driver);
@@ -43,24 +53,31 @@ public class ProductsListPageAndroid extends ProductsListPage implements IMobile
         setUiLoadedMarker(title);
     }
 
-    public FooterComponent getFooter() {
+    public AndroidFooterComponent getFooter() {
         return footerContainer;
     }
 
-    public List<ProductComponent> getProductItems() {
-        return productComponentList;
+    public List<AndroidProductComponent> productListItems () {
+        return androidProductComponentList;
+    }
+
+    public AndroidSideMenuComponent getSideMenu() {
+        return sideMenuContainer;
+    }
+
+    public AndroidHeaderMenuComponent getHeaderMenu() {
+        return headerMenu;
     }
 
     @Override
-    public LoginPageBaseAndroid logout() {
-        getHeaderMenu().openHeaderMenu();
-        getHeaderMenu().logoutButtonClick();
-        return new LoginPageBaseAndroid(getDriver());
+    public LoginPageBase logout() {
+        getHeaderMenu().openSideMenu();
+        return getSideMenu().clickMenuButton(MenuButtons.LOGOUT, LoginPageBase.class);
     }
 
     @Override
     public List<String> getAllProductNames() {
-        return collectProductValues(ProductComponent::getProductName);
+        return collectProductValues(AndroidProductComponent::getProductName);
     }
 
     @Override
@@ -85,17 +102,15 @@ public class ProductsListPageAndroid extends ProductsListPage implements IMobile
     private List<Product> collectAllProducts() {
         Set<String> seenTitles = new HashSet<>();
         List<Product> collected = new ArrayList<>();
-
         while (!getFooter().isVisible()) {
-            for (ProductComponent item : getProductItems()) {
-                Product product = item.toModel();
+            for (AndroidProductComponent item : productListItems()) {
+                Product product = item.mapToProduct();
                 if (seenTitles.add(product.getProductTitle())) {
                     collected.add(product);
                 }
             }
             swipeUpToFooter();
         }
-
         return collected;
     }
 
@@ -103,7 +118,7 @@ public class ProductsListPageAndroid extends ProductsListPage implements IMobile
     public void addProductToCartByName(String productName) {
         int safetyCounter = MAX_SCROLL_ATTEMPTS;
         while (safetyCounter-- > 0) {
-            Optional<ProductComponent> target = getProductItems().stream()
+            Optional<AndroidProductComponent> target = productListItems().stream()
                     .filter(p -> p.getProductName().equalsIgnoreCase(productName))
                     .findFirst();
             if (target.isPresent()) {
@@ -124,18 +139,18 @@ public class ProductsListPageAndroid extends ProductsListPage implements IMobile
 
     @Override
     public void resetAppState() {
-        getHeaderMenu().openHeaderMenu();
-        getHeaderMenu().resetAppState();
+        getHeaderMenu().openSideMenu();
+        getSideMenu().clickMenuButton(MenuButtons.RESET_APP_STATE, ProductsListPage.class);
     }
 
     private void swipeUpToFooter() {
         swipe(getFooter().getAllRightsReservedLabel(), Direction.UP, SWIPE_STEPS, SWIPE_DURATION);
     }
 
-    private <T> List<T> collectProductValues(Function<ProductComponent, T> extractor) {
+    private <T> List<T> collectProductValues(Function<AndroidProductComponent, T> extractor) {
         Set<T> uniqueValues = new LinkedHashSet<>();
         while (!getFooter().isVisible()) {
-            for (ProductComponent productItem : getProductItems()) {
+            for (AndroidProductComponent productItem : productListItems()) {
                 uniqueValues.add(extractor.apply(productItem));
             }
             swipeUpToFooter();

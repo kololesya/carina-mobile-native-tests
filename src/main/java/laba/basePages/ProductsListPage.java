@@ -2,10 +2,11 @@ package laba.basePages;
 
 import java.util.List;
 
-
 import org.openqa.selenium.WebDriver;
 
-import laba.components.FooterComponent;
+import laba.components.common.FooterComponent;
+import laba.components.common.HeaderMenuComponent;
+import laba.components.common.SideMenuComponent;
 
 public abstract class ProductsListPage extends BasePage {
 
@@ -18,6 +19,10 @@ public abstract class ProductsListPage extends BasePage {
     public abstract List<Double> getAllProductPrices();
 
     public abstract FooterComponent getFooter();
+
+    public abstract SideMenuComponent getSideMenu();
+
+    public abstract HeaderMenuComponent getHeaderMenu();
 
     public abstract void selectSortingOption(String option);
 

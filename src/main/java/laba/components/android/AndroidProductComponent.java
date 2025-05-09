@@ -1,16 +1,15 @@
-package laba.components;
+package laba.components.android;
 
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
 
+import laba.components.common.ProductComponent;
 import laba.model.Product;
 
-public class ProductComponent extends AbstractUIObject implements IMobileUtils {
+public class AndroidProductComponent extends ProductComponent {
 
     @FindBy(xpath = ".//android.widget.TextView[@content-desc='test-Item title']")
     private ExtendedWebElement productName;
@@ -21,17 +20,17 @@ public class ProductComponent extends AbstractUIObject implements IMobileUtils {
     @FindBy(xpath = ".//android.view.ViewGroup[@content-desc='test-ADD TO CART']")
     private ExtendedWebElement addToCartButton;
 
-    public ProductComponent(WebDriver driver, SearchContext searchContext) {
+    public AndroidProductComponent (WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
     public String getProductName() {
-        swipe(productName, IMobileUtils.Direction.UP, 3, 1000);
+        swipe(productName, Direction.UP, 3, 1000);
         return productName.getText().trim();
     }
 
     public String getProductPrice() {
-        swipe(productName, IMobileUtils.Direction.UP, 3, 1000);
+        swipe(productName, Direction.UP, 3, 1000);
         return productPrice.getText().trim();
     }
 
@@ -51,7 +50,7 @@ public class ProductComponent extends AbstractUIObject implements IMobileUtils {
         return productName.isElementPresent(3) && !productName.getText().trim().isEmpty();
     }
 
-    public Product toModel() {
+    public Product mapToProduct () {
         return new Product(
                 getProductName(),
                 Double.parseDouble(getProductPrice().replaceAll("[^\\d.,]", "").replace(",", "."))
