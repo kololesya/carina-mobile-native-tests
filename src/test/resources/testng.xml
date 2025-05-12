@@ -2,7 +2,11 @@
 <suite name="Mobile Suite" verbose="1" parallel="tests" thread-count="1">
     <test name="MobileTest">
         <classes>
-
+            <class name="LoginTest"/>
+            <class name="LogoutTest"/>
+            <class name="ProductSortingTest"/>
+            <class name="ProductsPageTest"/>
+            <class name="ResetAppStateTest"/>
         </classes>
     </test>
 </suite>

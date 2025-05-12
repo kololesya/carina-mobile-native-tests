@@ -1,16 +1,14 @@
 import com.zebrunner.carina.core.IAbstractTest;
-import com.zebrunner.carina.utils.R;
+import com.zebrunner.carina.utils.factory.ICustomTypePageFactory;
 
-import laba.pages.LoginPage;
-import laba.pages.ProductsPage;
+import laba.basePages.LoginPageBase;
+import laba.basePages.ProductsListPage;
+import laba.model.UserRepository;
 
-public class BaseTest implements IAbstractTest {
+public class BaseTest implements IAbstractTest, ICustomTypePageFactory {
 
-    public ProductsPage loginAsStandardUser() {
-        LoginPage loginPage = new LoginPage(getDriver());
-        return loginPage.login(
-                R.TESTDATA.getDecrypted("user.standard"),
-                R.TESTDATA.getDecrypted("password.valid")
-        );
+    public ProductsListPage loginAsStandardUser() {
+        LoginPageBase loginPageBase = initPage(getDriver(), LoginPageBase.class);
+        return loginPageBase.login(UserRepository.getStandardUser());
     }
 }
