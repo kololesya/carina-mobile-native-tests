@@ -10,6 +10,7 @@ import laba.androidPages.CartPageAndroid;
 import laba.components.common.HeaderMenuComponent;
 
 public class AndroidHeaderMenuComponent extends HeaderMenuComponent {
+
     @FindBy(xpath = ".//*[@content-desc='test-Cart']")
     private ExtendedWebElement cartIcon;
 
@@ -37,10 +38,5 @@ public class AndroidHeaderMenuComponent extends HeaderMenuComponent {
         return cartBadge.isElementPresent(5)
                 ? cartBadge.getText().trim().equals(String.valueOf(expectedCount))
                 : expectedCount == 0;
-    }
-
-    @Override
-    public boolean isCartIconPresent() {
-        return cartIcon.isElementPresent(5);
     }
 }

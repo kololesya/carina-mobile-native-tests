@@ -1,5 +1,6 @@
 package laba.androidPages;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.Function;
 
@@ -7,9 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import com.zebrunner.carina.utils.factory.DeviceType;
-import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
 import laba.basePages.ProductsListPage;
@@ -20,11 +19,12 @@ import laba.components.android.AndroidSideMenuComponent;
 import laba.constants.MenuButtons;
 import laba.model.Product;
 import laba.basePages.LoginPageBase;
+import laba.basePages.DrawingPageBase;
 
 import static laba.constants.ProjectConstants.*;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = ProductsListPage.class)
-public class ProductsListPageAndroid extends ProductsListPage implements IMobileUtils {
+public class ProductsListPageAndroid extends ProductsListPage {
 
     @FindBy(xpath = "//*[@content-desc='test-Menu']/..")
     private AndroidHeaderMenuComponent headerMenu;
@@ -44,12 +44,13 @@ public class ProductsListPageAndroid extends ProductsListPage implements IMobile
     @FindBy(xpath = "//android.widget.TextView[contains(@text, 'Sauce Labs. All Rights Reserved')]")
     private AndroidFooterComponent footerContainer;
 
-    @FindBy(xpath = "//android.view.ViewGroup[.//*[@content-desc='test-LOGOUT']]")
+    //@FindBy(xpath = "//android.view.ViewGroup[.//*[@content-desc='test-LOGOUT']]")
+    @FindBy(xpath = "//*[@content-desc='test-Close']/..")
     private AndroidSideMenuComponent sideMenuContainer;
+
 
     public ProductsListPageAndroid(WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(title);
     }
 
@@ -76,6 +77,12 @@ public class ProductsListPageAndroid extends ProductsListPage implements IMobile
     }
 
     @Override
+    public DrawingPageBase drawing() {
+        getHeaderMenu().openSideMenu();
+        return getSideMenu().clickMenuButton(MenuButtons.DRAWING, DrawingPageBase.class);
+    }
+
+    @Override
     public List<String> getAllProductNames() {
         return collectProductValues(AndroidProductComponent::getProductName);
     }
@@ -95,8 +102,9 @@ public class ProductsListPageAndroid extends ProductsListPage implements IMobile
     public boolean areAllProductNamesVisible() {
         List<Product> products = collectAllProducts();
         return products.stream()
-                .allMatch(p -> p.getProductTitle() != null && !p.getProductTitle().isEmpty()
-                        && p.getProductPrice() > 0);
+                .allMatch(p -> p.getProductTitle() != null
+                        && !p.getProductTitle().isEmpty()
+                        && p.getProductPrice().compareTo(BigDecimal.ZERO) > 0);
     }
 
     private List<Product> collectAllProducts() {
@@ -156,5 +164,10 @@ public class ProductsListPageAndroid extends ProductsListPage implements IMobile
             swipeUpToFooter();
         }
         return new ArrayList<>(uniqueValues);
+    }
+
+    @Override
+    public String getTitle() {
+        return title.getAttribute("content-desc");
     }
 }

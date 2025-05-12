@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import laba.components.common.FooterComponent;
 
 public class AndroidFooterComponent extends FooterComponent {
+
     @FindBy(xpath = ".//android.widget.TextView[contains(@text,'All Rights Reserved')]")
     private ExtendedWebElement allRightsReservedLabel;
 

@@ -9,6 +9,8 @@ import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import laba.components.common.ProductComponent;
 import laba.model.Product;
 
+import java.math.BigDecimal;
+
 public class AndroidProductComponent extends ProductComponent {
 
     @FindBy(xpath = ".//android.widget.TextView[@content-desc='test-Item title']")
@@ -50,10 +52,10 @@ public class AndroidProductComponent extends ProductComponent {
         return productName.isElementPresent(3) && !productName.getText().trim().isEmpty();
     }
 
-    public Product mapToProduct () {
-        return new Product(
-                getProductName(),
-                Double.parseDouble(getProductPrice().replaceAll("[^\\d.,]", "").replace(",", "."))
-        );
+    public Product mapToProduct() {
+        String priceText = getProductPrice().replaceAll("[^\\d.,]", "").replace(",", ".");
+        BigDecimal price = new BigDecimal(priceText);
+        return new Product(getProductName(), price);
     }
+
 }
