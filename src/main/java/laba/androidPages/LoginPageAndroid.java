@@ -4,16 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import com.zebrunner.carina.utils.factory.DeviceType;
-import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
 import laba.basePages.LoginPageBase;
 import laba.basePages.ProductsListPage;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = LoginPageBase.class)
-public class LoginPageAndroid extends LoginPageBase implements IMobileUtils {
+public class LoginPageAndroid extends LoginPageBase {
 
     @ExtendedFindBy(accessibilityId = "test-Username")
     private ExtendedWebElement usernameField;
@@ -29,7 +27,6 @@ public class LoginPageAndroid extends LoginPageBase implements IMobileUtils {
 
     public LoginPageAndroid (WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(loginButton);
     }
 

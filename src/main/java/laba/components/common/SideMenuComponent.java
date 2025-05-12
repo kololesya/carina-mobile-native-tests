@@ -14,5 +14,4 @@ public abstract class SideMenuComponent extends AbstractComponent {
     }
 
     public abstract <T extends AbstractPage> T clickMenuButton(MenuButtons button, Class<T> returnPage);
-
 }

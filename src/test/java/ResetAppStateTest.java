@@ -7,6 +7,7 @@ import laba.basePages.ProductsListPage;
 import static laba.constants.ProjectConstants.*;
 
 public class ResetAppStateTest extends BaseTest {
+
     @Test
     public void testResetAppState() {
         ProductsListPage productListPage = loginAsStandardUser();

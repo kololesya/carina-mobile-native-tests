@@ -1,5 +1,6 @@
 package laba.androidPages;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.Function;
 
@@ -43,8 +44,10 @@ public class ProductsListPageAndroid extends ProductsListPage {
     @FindBy(xpath = "//android.widget.TextView[contains(@text, 'Sauce Labs. All Rights Reserved')]")
     private AndroidFooterComponent footerContainer;
 
-    @FindBy(xpath = "//android.view.ViewGroup[.//*[@content-desc='test-LOGOUT']]")
+    //@FindBy(xpath = "//android.view.ViewGroup[.//*[@content-desc='test-LOGOUT']]")
+    @FindBy(xpath = "//*[@content-desc='test-Close']/..")
     private AndroidSideMenuComponent sideMenuContainer;
+
 
     public ProductsListPageAndroid(WebDriver driver) {
         super(driver);
@@ -99,8 +102,9 @@ public class ProductsListPageAndroid extends ProductsListPage {
     public boolean areAllProductNamesVisible() {
         List<Product> products = collectAllProducts();
         return products.stream()
-                .allMatch(p -> p.getProductTitle() != null && !p.getProductTitle().isEmpty()
-                        && p.getProductPrice() > 0);
+                .allMatch(p -> p.getProductTitle() != null
+                        && !p.getProductTitle().isEmpty()
+                        && p.getProductPrice().compareTo(BigDecimal.ZERO) > 0);
     }
 
     private List<Product> collectAllProducts() {

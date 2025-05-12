@@ -5,6 +5,7 @@ import laba.basePages.LoginPageBase;
 import laba.basePages.ProductsListPage;
 
 public class LogoutTest extends BaseTest {
+
     @Test
     public void testLogout() {
         ProductsListPage productsPage = loginAsStandardUser();
