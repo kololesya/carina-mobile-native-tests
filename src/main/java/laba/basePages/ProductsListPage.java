@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 
+import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
+
 import laba.components.common.FooterComponent;
 import laba.components.common.HeaderMenuComponent;
 import laba.components.common.SideMenuComponent;
@@ -12,6 +14,7 @@ public abstract class ProductsListPage extends BasePage {
 
     public ProductsListPage(WebDriver driver) {
         super(driver);
+        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
     }
 
     public abstract List<String> getAllProductNames();
@@ -32,5 +35,9 @@ public abstract class ProductsListPage extends BasePage {
 
     public abstract void resetAppState();
 
+    public abstract DrawingPageBase drawing();
+
     public abstract boolean areAllProductNamesVisible();
+
+    public abstract String getTitle();
 }

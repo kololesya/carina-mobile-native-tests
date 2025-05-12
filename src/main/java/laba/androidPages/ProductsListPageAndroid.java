@@ -7,9 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import com.zebrunner.carina.utils.factory.DeviceType;
-import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
 import laba.basePages.ProductsListPage;
@@ -20,11 +18,12 @@ import laba.components.android.AndroidSideMenuComponent;
 import laba.constants.MenuButtons;
 import laba.model.Product;
 import laba.basePages.LoginPageBase;
+import laba.basePages.DrawingPageBase;
 
 import static laba.constants.ProjectConstants.*;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = ProductsListPage.class)
-public class ProductsListPageAndroid extends ProductsListPage implements IMobileUtils {
+public class ProductsListPageAndroid extends ProductsListPage {
 
     @FindBy(xpath = "//*[@content-desc='test-Menu']/..")
     private AndroidHeaderMenuComponent headerMenu;
@@ -49,7 +48,6 @@ public class ProductsListPageAndroid extends ProductsListPage implements IMobile
 
     public ProductsListPageAndroid(WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(title);
     }
 
@@ -73,6 +71,12 @@ public class ProductsListPageAndroid extends ProductsListPage implements IMobile
     public LoginPageBase logout() {
         getHeaderMenu().openSideMenu();
         return getSideMenu().clickMenuButton(MenuButtons.LOGOUT, LoginPageBase.class);
+    }
+
+    @Override
+    public DrawingPageBase drawing() {
+        getHeaderMenu().openSideMenu();
+        return getSideMenu().clickMenuButton(MenuButtons.DRAWING, DrawingPageBase.class);
     }
 
     @Override
@@ -156,5 +160,10 @@ public class ProductsListPageAndroid extends ProductsListPage implements IMobile
             swipeUpToFooter();
         }
         return new ArrayList<>(uniqueValues);
+    }
+
+    @Override
+    public String getTitle() {
+        return title.getAttribute("content-desc");
     }
 }

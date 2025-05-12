@@ -6,10 +6,14 @@ import laba.components.common.FooterComponent;
 import laba.components.common.HeaderMenuComponent;
 import laba.components.common.SideMenuComponent;
 
-public abstract class CartPageBase extends BasePage{
+import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
+
+public abstract class CartPageBase extends BasePage {
 
     public CartPageBase(WebDriver driver) {
         super(driver);
+        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
     }
 
     public abstract FooterComponent getFooter();

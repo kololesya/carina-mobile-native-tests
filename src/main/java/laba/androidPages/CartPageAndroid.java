@@ -36,7 +36,6 @@ public class CartPageAndroid extends CartPageBase {
 
     public CartPageAndroid (WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(checkoutButton);
     }
 
