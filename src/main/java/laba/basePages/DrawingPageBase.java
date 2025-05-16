@@ -4,17 +4,33 @@ import org.openqa.selenium.WebDriver;
 
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
+import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
 public abstract class DrawingPageBase extends BasePage {
 
-    public abstract void draw();
+    @ExtendedFindBy(image = "img/red_filled_rectangle.png")
+    private ExtendedWebElement drawnImage;
 
-    public abstract boolean isDrawingPresent();
-
-    public abstract ExtendedWebElement getDrawingCanvas();
+    public void drawRectangle () {
+        int leftX = 200;
+        int rightX = 600;
+        int topY = 700;
+        int bottomY = 850;
+        swipe(leftX, topY, rightX, topY, 1500);
+        swipe(rightX, topY, rightX, bottomY, 1500);
+        swipe(rightX, bottomY, leftX, bottomY, 1500);
+        swipe(leftX, bottomY, leftX, topY, 1500);
+        for (int y = topY + 10; y < bottomY; y += 20) {
+            swipe(leftX + 10, y, rightX - 10, y, 800);
+        }
+    }
 
     public DrawingPageBase (WebDriver driver) {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
+    }
+
+    public boolean isRectangleDrawn() {
+        return drawnImage.isElementPresent(5);
     }
 }

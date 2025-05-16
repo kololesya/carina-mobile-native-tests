@@ -44,10 +44,8 @@ public class ProductsListPageAndroid extends ProductsListPage {
     @FindBy(xpath = "//android.widget.TextView[contains(@text, 'Sauce Labs. All Rights Reserved')]")
     private AndroidFooterComponent footerContainer;
 
-    //@FindBy(xpath = "//android.view.ViewGroup[.//*[@content-desc='test-LOGOUT']]")
     @FindBy(xpath = "//*[@content-desc='test-Close']/..")
     private AndroidSideMenuComponent sideMenuContainer;
-
 
     public ProductsListPageAndroid(WebDriver driver) {
         super(driver);

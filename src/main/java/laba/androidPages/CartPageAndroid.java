@@ -30,7 +30,7 @@ public class CartPageAndroid extends CartPageBase {
     @FindBy(xpath = "//android.view.ViewGroup[.//android.widget.TextView[contains(@text,'All Rights Reserved')]]")
     private AndroidFooterComponent footerContainer;
 
-    @FindBy(xpath = "//android.view.ViewGroup[.//*[@content-desc='test-LOGOUT']]")
+    @FindBy(xpath = "//*[@content-desc='test-Close']/..")
     private AndroidSideMenuComponent sideMenuContainer;
 
     public CartPageAndroid (WebDriver driver) {

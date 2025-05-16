@@ -18,37 +18,8 @@ public class DrawingPageAndroid extends DrawingPageBase {
     @FindBy(className = "android.webkit.WebView")
     private ExtendedWebElement drawingCanvas;
 
-    @Override
-    public void draw() {
-        tap(300, 1000);
-        tap(300, 1050);
-        tap(300, 1100);
-        tap(300, 1150);
-        tap(300, 1200);
-
-        tap(300, 1000);
-        tap(350, 1000);
-        tap(400, 1000);
-        tap(450, 1000);
-        tap(500, 1000);
-
-        tap(500, 1000);
-        tap(500, 1050);
-        tap(500, 1100);
-        tap(500, 1150);
-        tap(500, 1200);
-    }
-
     public DrawingPageAndroid (WebDriver driver) {
         super(driver);
         setUiLoadedMarker(drawScreenContainer);
-    }
-
-    public boolean isDrawingPresent () {
-        return drawingCanvas.isElementPresent();
-    }
-
-    public ExtendedWebElement getDrawingCanvas() {
-        return drawingCanvas;
     }
 }
