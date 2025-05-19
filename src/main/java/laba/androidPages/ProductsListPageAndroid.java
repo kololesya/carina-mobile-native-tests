@@ -1,30 +1,30 @@
 package laba.androidPages;
 
-import java.math.BigDecimal;
+import java.math.*;
 import java.util.*;
-import java.util.function.Function;
+import java.util.function.*;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
-import laba.basePages.ProductsListPage;
+import laba.basePages.DrawingPageBase;
+import laba.basePages.LoginPageBase;
+import laba.basePages.ProductsListPageBase;
 import laba.components.android.AndroidFooterComponent;
 import laba.components.android.AndroidHeaderMenuComponent;
 import laba.components.android.AndroidProductComponent;
 import laba.components.android.AndroidSideMenuComponent;
 import laba.constants.MenuButtons;
 import laba.model.Product;
-import laba.basePages.LoginPageBase;
-import laba.basePages.DrawingPageBase;
+import static laba.constants.ProjectConstants.MAX_SCROLL_ATTEMPTS;
+import static laba.constants.ProjectConstants.SWIPE_DURATION;
+import static laba.constants.ProjectConstants.SWIPE_STEPS;
 
-import static laba.constants.ProjectConstants.*;
-
-@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = ProductsListPage.class)
-public class ProductsListPageAndroid extends ProductsListPage {
+@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = ProductsListPageBase.class)
+public class ProductsListPageAndroid extends ProductsListPageBase {
 
     @FindBy(xpath = "//*[@content-desc='test-Menu']/..")
     private AndroidHeaderMenuComponent headerMenu;
@@ -56,7 +56,7 @@ public class ProductsListPageAndroid extends ProductsListPage {
         return footerContainer;
     }
 
-    public List<AndroidProductComponent> productListItems () {
+    public List<AndroidProductComponent> productListItems() {
         return androidProductComponentList;
     }
 
@@ -146,7 +146,23 @@ public class ProductsListPageAndroid extends ProductsListPage {
     @Override
     public void resetAppState() {
         getHeaderMenu().openSideMenu();
-        getSideMenu().clickMenuButton(MenuButtons.RESET_APP_STATE, ProductsListPage.class);
+        getSideMenu().clickMenuButton(MenuButtons.RESET_APP_STATE, ProductsListPageBase.class);
+    }
+
+    @Override
+    public boolean isRemoveButtonVisibleForProduct(String productName) {
+        int safetyCounter = MAX_SCROLL_ATTEMPTS;
+        while (safetyCounter-- > 0) {
+            Optional<AndroidProductComponent> target = productListItems().stream()
+                    .filter(p -> p.getProductName().equalsIgnoreCase(productName))
+                    .findFirst();
+            if (target.isPresent()) {
+                return target.get().isRemoveButtonVisible();
+            }
+            if (getFooter().isVisible()) break;
+            swipeUpToFooter();
+        }
+        throw new IllegalStateException("Product not found after scrolling: " + productName);
     }
 
     private void swipeUpToFooter() {

@@ -1,18 +1,17 @@
 package laba.basePages;
 
-import java.util.List;
+import java.util.*;
 
 import org.openqa.selenium.WebDriver;
-
 import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 
 import laba.components.common.FooterComponent;
 import laba.components.common.HeaderMenuComponent;
 import laba.components.common.SideMenuComponent;
 
-public abstract class ProductsListPage extends BasePage {
+public abstract class ProductsListPageBase extends BasePage {
 
-    public ProductsListPage(WebDriver driver) {
+    public ProductsListPageBase(WebDriver driver) {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
     }
@@ -40,4 +39,6 @@ public abstract class ProductsListPage extends BasePage {
     public abstract boolean areAllProductNamesVisible();
 
     public abstract String getTitle();
+
+    public abstract boolean isRemoveButtonVisibleForProduct(String productName);
 }

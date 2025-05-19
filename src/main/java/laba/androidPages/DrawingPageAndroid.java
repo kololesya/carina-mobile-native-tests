@@ -2,7 +2,6 @@ package laba.androidPages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
@@ -18,7 +17,7 @@ public class DrawingPageAndroid extends DrawingPageBase {
     @FindBy(className = "android.webkit.WebView")
     private ExtendedWebElement drawingCanvas;
 
-    public DrawingPageAndroid (WebDriver driver) {
+    public DrawingPageAndroid(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(drawScreenContainer);
     }

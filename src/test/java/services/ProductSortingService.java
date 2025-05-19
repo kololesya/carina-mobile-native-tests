@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import laba.basePages.ProductsListPageBase;
 import laba.constants.SortType;
-import laba.basePages.ProductsListPage;
 
 public class ProductSortingService {
-    private final ProductsListPage productsPage;
+    private final ProductsListPageBase productsPage;
 
-    public ProductSortingService (ProductsListPage productsPage) {
+    public ProductSortingService (ProductsListPageBase productsPage) {
         this.productsPage = productsPage;
     }
 

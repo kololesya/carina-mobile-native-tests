@@ -16,9 +16,9 @@ public abstract class LoginPageBase extends BasePage {
 
     public abstract String getErrorMessageText();
 
-    public abstract ProductsListPage login(String username, String password);
+    public abstract ProductsListPageBase login(String username, String password);
 
-    public ProductsListPage login(User user) {
+    public ProductsListPageBase login(User user) {
         return login(user.getUsername(), user.getPassword());
     }
 }

@@ -22,6 +22,9 @@ public class AndroidProductComponent extends ProductComponent {
     @FindBy(xpath = ".//android.view.ViewGroup[@content-desc='test-ADD TO CART']")
     private ExtendedWebElement addToCartButton;
 
+    @FindBy(xpath = ".//android.view.ViewGroup[@content-desc='test-REMOVE']")
+    private ExtendedWebElement removeButton;
+
     public AndroidProductComponent (WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
@@ -48,14 +51,13 @@ public class AndroidProductComponent extends ProductComponent {
         addToCartButton.click();
     }
 
-    public boolean isProductNameVisible() {
-        return productName.isElementPresent(3) && !productName.getText().trim().isEmpty();
-    }
-
     public Product mapToProduct() {
         String priceText = getProductPrice().replaceAll("[^\\d.,]", "").replace(",", ".");
         BigDecimal price = new BigDecimal(priceText);
         return new Product(getProductName(), price);
     }
 
+    public boolean isRemoveButtonVisible() {
+        return removeButton.isElementPresent();
+    }
 }

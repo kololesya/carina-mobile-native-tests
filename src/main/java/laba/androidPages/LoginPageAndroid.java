@@ -8,7 +8,7 @@ import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
 import laba.basePages.LoginPageBase;
-import laba.basePages.ProductsListPage;
+import laba.basePages.ProductsListPageBase;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = LoginPageBase.class)
 public class LoginPageAndroid extends LoginPageBase {
@@ -31,11 +31,11 @@ public class LoginPageAndroid extends LoginPageBase {
     }
 
     @Override
-    public ProductsListPage login(String username, String password) {
+    public ProductsListPageBase login(String username, String password) {
         usernameField.type(username);
         passwordField.type(password);
         loginButton.click();
-        return initPage(getDriver(), ProductsListPage.class);
+        return initPage(getDriver(), ProductsListPageBase.class);
     }
 
     public boolean isErrorMessagePresent() {
