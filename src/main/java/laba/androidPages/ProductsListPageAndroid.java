@@ -12,6 +12,7 @@ import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
 import laba.basePages.DrawingPageBase;
 import laba.basePages.LoginPageBase;
+import laba.basePages.ProductDetailsPageBase;
 import laba.basePages.ProductsListPageBase;
 import laba.components.android.AndroidFooterComponent;
 import laba.components.android.AndroidHeaderMenuComponent;
@@ -81,6 +82,23 @@ public class ProductsListPageAndroid extends ProductsListPageBase {
     }
 
     @Override
+    public ProductDetailsPageBase openProductByName(String productName) {
+        int safetyCounter = MAX_SCROLL_ATTEMPTS;
+        while (safetyCounter-- > 0) {
+            Optional<AndroidProductComponent> target = productListItems().stream()
+                    .filter(p -> p.getProductName().equalsIgnoreCase(productName))
+                    .findFirst();
+            if (target.isPresent()) {
+                target.get().clickOnProductName();
+                return initPage(getDriver(), ProductDetailsPageBase.class);
+            }
+            if (getFooter().isVisible()) break;
+            swipeUpToFooter();
+        }
+        throw new IllegalStateException("Product not found for opening: " + productName);
+    }
+
+    @Override
     public List<String> getAllProductNames() {
         return collectProductValues(AndroidProductComponent::getProductName);
     }
@@ -135,6 +153,22 @@ public class ProductsListPageAndroid extends ProductsListPageBase {
             swipeUpToFooter();
         }
         throw new IllegalStateException("Product not found after scrolling: " + productName);
+    }
+
+    @Override
+    public Product getProductFromListByName(String productName) {
+        int safetyCounter = MAX_SCROLL_ATTEMPTS;
+        while (safetyCounter-- > 0) {
+            Optional<AndroidProductComponent> target = productListItems().stream()
+                    .filter(p -> p.getProductName().equalsIgnoreCase(productName))
+                    .findFirst();
+            if (target.isPresent()) {
+                return target.get().mapToProduct();
+            }
+            if (getFooter().isVisible()) break;
+            swipeUpToFooter();
+        }
+        throw new NoSuchElementException("Товар не найден на главной странице: " + productName);
     }
 
     @Override

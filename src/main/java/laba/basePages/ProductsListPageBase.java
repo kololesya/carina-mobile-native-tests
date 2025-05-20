@@ -8,6 +8,7 @@ import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import laba.components.common.FooterComponent;
 import laba.components.common.HeaderMenuComponent;
 import laba.components.common.SideMenuComponent;
+import laba.model.Product;
 
 public abstract class ProductsListPageBase extends BasePage {
 
@@ -15,6 +16,8 @@ public abstract class ProductsListPageBase extends BasePage {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
     }
+
+    public abstract ProductDetailsPageBase openProductByName(String productName);
 
     public abstract List<String> getAllProductNames();
 
@@ -25,6 +28,8 @@ public abstract class ProductsListPageBase extends BasePage {
     public abstract SideMenuComponent getSideMenu();
 
     public abstract HeaderMenuComponent getHeaderMenu();
+
+    public abstract Product getProductFromListByName(String productName);
 
     public abstract void selectSortingOption(String option);
 

@@ -1,15 +1,14 @@
 package laba.components.android;
 
+import java.math.*;
+
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 
 import laba.components.common.ProductComponent;
 import laba.model.Product;
-
-import java.math.BigDecimal;
 
 public class AndroidProductComponent extends ProductComponent {
 
@@ -25,7 +24,7 @@ public class AndroidProductComponent extends ProductComponent {
     @FindBy(xpath = ".//android.view.ViewGroup[@content-desc='test-REMOVE']")
     private ExtendedWebElement removeButton;
 
-    public AndroidProductComponent (WebDriver driver, SearchContext searchContext) {
+    public AndroidProductComponent(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
@@ -45,10 +44,6 @@ public class AndroidProductComponent extends ProductComponent {
 
     public void clickOnProductName() {
         productName.click();
-    }
-
-    public void removeFromCart() {
-        addToCartButton.click();
     }
 
     public Product mapToProduct() {
