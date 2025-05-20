@@ -36,11 +36,11 @@ public class CartPageAndroid extends CartPageBase {
     @FindBy(xpath = "//*[@content-desc='test-Close']/..")
     private AndroidSideMenuComponent sideMenuContainer;
 
-    @ExtendedFindBy(accessibilityId = "test-Item")
-    private List<AndroidCartItemComponent> productList;
-
-    @FindBy(xpath = "//android.view.ViewGroup[@content-desc='test-Description']/android.widget.TextView[1]")
+    @FindBy(xpath = "//android.view.ViewGroup[@content-desc=\"test-Description\"]/android.widget.TextView")
     private List<ExtendedWebElement> productTitles;
+
+    @ExtendedFindBy(accessibilityId = "test-Item")
+    private List<AndroidCartItemComponent> productComponents;
 
     public CartPageAndroid(WebDriver driver) {
         super(driver);
@@ -72,16 +72,13 @@ public class CartPageAndroid extends CartPageBase {
         return initPage(getDriver(), CheckoutPageBase.class);
     }
 
-    public boolean isProductInCart(String expectedProductName) {
-        return productTitles.stream()
-                .map(ExtendedWebElement::getText)
-                .anyMatch(text -> text.equalsIgnoreCase(expectedProductName));
+    @Override
+    public boolean isProductInCart(String product) {
+        for (AndroidCartItemComponent item : productComponents) {
+            if (item.getProductName().equals(product)) {
+                return true;
+            }
+        }
+        return false;
     }
-
-//
-//    @Override
-//    public boolean isProductInCart(String productName) {
-//        return productList.stream()
-//                .anyMatch(item -> item.getProductName().equalsIgnoreCase(productName));
-//    }
 }

@@ -8,15 +8,15 @@ import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import laba.components.common.CartItemComponent;
 
 public class AndroidCartItemComponent extends CartItemComponent {
-    @FindBy(xpath = ".//android.widget.TextView[1]")
-    private ExtendedWebElement productName;
+
+    @FindBy(xpath = ".//*[@content-desc='test-Description']/android.widget.TextView[1]")
+    private ExtendedWebElement title;
 
     public AndroidCartItemComponent(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
-    @Override
     public String getProductName() {
-        return productName.getText();
+        return title.getText();
     }
 }

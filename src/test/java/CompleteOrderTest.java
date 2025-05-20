@@ -34,12 +34,15 @@ public class CompleteOrderTest extends BaseTest {
         productsPage.addProductToCartByName(SAUCE_LABS_ONESIE);
         CartPageBase cartPage = productsPage.getHeaderMenu().clickCartIcon();
         Assert.assertTrue(cartPage.isPageOpened(), "Cart page was not opened.");
+        Assert.assertTrue(cartPage.isProductInCart(SAUCE_LABS_ONESIE),
+                "Previously added item is not present in the cart.");
         CheckoutPageBase checkoutPage = cartPage.clickCheckoutButton();
         Assert.assertTrue(checkoutPage.isPageOpened(), "Checkout page did not open.");
-        productsPage = checkoutPage.clickCancelButton();
-        Assert.assertTrue(productsPage.isPageOpened(), "User was not returned to Products page after cancel.");
-        cartPage = productsPage.getHeaderMenu().clickCartIcon();
-        Assert.assertTrue(cartPage.isProductInCart(SAUCE_LABS_ONESIE),
+        ProductsListPageBase productsPageAfterCancellation = checkoutPage.clickCancelButton();
+        Assert.assertTrue(productsPageAfterCancellation.isPageOpened(), "User was not returned to Products page after cancel.");
+        CartPageBase cartPageAfterCancellation = productsPageAfterCancellation.getHeaderMenu().clickCartIcon();
+        Assert.assertTrue(cartPageAfterCancellation.isPageOpened(), "Cart page was not opened.");
+        Assert.assertTrue(cartPageAfterCancellation.isProductInCart(SAUCE_LABS_ONESIE),
                 "Previously added item is not present in the cart.");
     }
 }

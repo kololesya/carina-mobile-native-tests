@@ -34,7 +34,7 @@ public abstract class ProductsListPageBase extends BasePage {
 
     public abstract void resetAppState();
 
-    public abstract DrawingPageBase drawing();
+    public abstract DrawingPageBase openDrawingPage();
 
     public abstract boolean areAllProductNamesVisible();
 

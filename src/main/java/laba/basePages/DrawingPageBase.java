@@ -1,17 +1,23 @@
 package laba.basePages;
 
 import org.openqa.selenium.WebDriver;
-
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
+
+import static laba.constants.ProjectConstants.IMAGE_PRESENCE_TIMEOUT_SECONDS;
 
 public abstract class DrawingPageBase extends BasePage {
 
     @ExtendedFindBy(image = "img/red_filled_rectangle.png")
     private ExtendedWebElement drawnImage;
 
-    public void drawRectangle () {
+    public DrawingPageBase(WebDriver driver) {
+        super(driver);
+        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
+    }
+
+    public void drawRectangle() {
         int leftX = 200;
         int rightX = 600;
         int topY = 700;
@@ -25,12 +31,7 @@ public abstract class DrawingPageBase extends BasePage {
         }
     }
 
-    public DrawingPageBase (WebDriver driver) {
-        super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
-    }
-
     public boolean isRectangleDrawn() {
-        return drawnImage.isElementPresent(5);
+        return drawnImage.isElementPresent(IMAGE_PRESENCE_TIMEOUT_SECONDS);
     }
 }

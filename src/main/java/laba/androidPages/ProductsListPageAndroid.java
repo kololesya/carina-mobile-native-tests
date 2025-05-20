@@ -75,7 +75,7 @@ public class ProductsListPageAndroid extends ProductsListPageBase {
     }
 
     @Override
-    public DrawingPageBase drawing() {
+    public DrawingPageBase openDrawingPage() {
         getHeaderMenu().openSideMenu();
         return getSideMenu().clickMenuButton(MenuButtons.DRAWING, DrawingPageBase.class);
     }
