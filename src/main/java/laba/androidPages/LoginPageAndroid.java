@@ -4,16 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import com.zebrunner.carina.utils.factory.DeviceType;
-import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
 import laba.basePages.LoginPageBase;
-import laba.basePages.ProductsListPage;
+import laba.basePages.ProductsListPageBase;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = LoginPageBase.class)
-public class LoginPageAndroid extends LoginPageBase implements IMobileUtils {
+public class LoginPageAndroid extends LoginPageBase {
 
     @ExtendedFindBy(accessibilityId = "test-Username")
     private ExtendedWebElement usernameField;
@@ -29,16 +27,15 @@ public class LoginPageAndroid extends LoginPageBase implements IMobileUtils {
 
     public LoginPageAndroid (WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(loginButton);
     }
 
     @Override
-    public ProductsListPage login(String username, String password) {
+    public ProductsListPageBase login(String username, String password) {
         usernameField.type(username);
         passwordField.type(password);
         loginButton.click();
-        return initPage(getDriver(), ProductsListPage.class);
+        return initPage(getDriver(), ProductsListPageBase.class);
     }
 
     public boolean isErrorMessagePresent() {

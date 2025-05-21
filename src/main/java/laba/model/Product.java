@@ -1,10 +1,12 @@
 package laba.model;
 
+import java.math.BigDecimal;
+
 public class Product {
     private final String productTitle;
-    private final double productPrice;
+    private final BigDecimal productPrice;
 
-    public Product(String productTitle, double productPrice) {
+    public Product(String productTitle, BigDecimal productPrice) {
         this.productTitle = productTitle;
         this.productPrice = productPrice;
     }
@@ -13,7 +15,7 @@ public class Product {
         return productTitle;
     }
 
-    public double getProductPrice() {
+    public BigDecimal getProductPrice() {
         return productPrice;
     }
 }

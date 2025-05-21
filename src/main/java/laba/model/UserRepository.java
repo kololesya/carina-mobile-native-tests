@@ -4,7 +4,6 @@ import com.zebrunner.carina.utils.R;
 
 public class UserRepository {
 
-
     public static User getStandardUser() {
         return new User(
                 R.TESTDATA.getDecrypted("user.standard"),

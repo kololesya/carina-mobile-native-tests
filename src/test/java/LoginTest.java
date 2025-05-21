@@ -3,7 +3,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import laba.basePages.LoginPageBase;
-import laba.basePages.ProductsListPage;
+import laba.basePages.ProductsListPageBase;
 import laba.model.User;
 import laba.model.UserRepository;
 
@@ -27,7 +27,7 @@ public class LoginTest extends BaseTest {
     public void testLoginScenarios(User user, boolean shouldLoginSucceed, String expectedErrorMessage) {
         LoginPageBase loginPage = initPage(LoginPageBase.class);
         Assert.assertTrue(loginPage.isPageOpened(), "Login page is not loaded!");
-        ProductsListPage productListPage = loginPage.login(
+        ProductsListPageBase productListPage = loginPage.login(
                 user.getUsername(),
                 user.getPassword()
         );
