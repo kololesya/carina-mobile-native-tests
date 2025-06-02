@@ -18,5 +18,5 @@ public class ProjectConstants {
 
     public static final int SWIPE_STEPS = 2;
 
-    public static final int IMAGE_PRESENCE_TIMEOUT_SECONDS = 5;
+    public static final int PRESENCE_TIMEOUT_SECONDS = 5;
 }

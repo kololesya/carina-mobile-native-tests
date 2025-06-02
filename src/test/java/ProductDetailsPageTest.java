@@ -1,9 +1,9 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import laba.basePages.ProductDetailsPageBase;
-import laba.basePages.ProductsListPageBase;
 import laba.model.Product;
+import laba.pages.basePages.ProductDetailsPageBase;
+import laba.pages.basePages.ProductsListPageBase;
 import static laba.constants.ProjectConstants.SAUCE_LABS_ONESIE;
 
 public class ProductDetailsPageTest extends BaseTest {

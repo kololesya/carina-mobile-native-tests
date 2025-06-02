@@ -1,4 +1,4 @@
-package laba.components.android;
+package laba.components.ios;
 
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -6,35 +6,38 @@ import org.openqa.selenium.support.FindBy;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 
 import laba.components.common.HeaderMenuComponent;
-import laba.pages.androidPages.CartPageAndroid;
+import laba.pages.iosPages.CartPageIOS;
+import static laba.constants.ProjectConstants.PRESENCE_TIMEOUT_SECONDS;
 
-public class AndroidHeaderMenuComponent extends HeaderMenuComponent {
+public class IOSHeaderMenuComponent extends HeaderMenuComponent {
 
-    @FindBy(xpath = ".//*[@content-desc='test-Cart']")
+    @FindBy(xpath = ".//XCUIElementTypeOther[@name='test-Cart']")
     private ExtendedWebElement cartIcon;
 
-    @FindBy(xpath = ".//*[@content-desc='test-Menu']")
+    @FindBy(xpath = ".//XCUIElementTypeOther[@name='test-Menu']")
     private ExtendedWebElement menuButton;
 
-    @FindBy(xpath = "//android.view.ViewGroup[@content-desc='test-Cart']//android.widget.TextView")
+    @FindBy(xpath = "//XCUIElementTypeOther[@name='test-Cart']//XCUIElementTypeStaticText")
     private ExtendedWebElement cartBadge;
 
-    public AndroidHeaderMenuComponent(WebDriver driver, SearchContext searchContext) {
+    public IOSHeaderMenuComponent(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
-    public CartPageAndroid clickCartIcon() {
+    @Override
+    public CartPageIOS clickCartIcon() {
         cartIcon.click();
-        return new CartPageAndroid(getDriver());
+        return new CartPageIOS(getDriver());
     }
 
+    @Override
     public void openSideMenu() {
         menuButton.click();
     }
 
     @Override
     public boolean isCartBadgeWithCount(int expectedCount) {
-        return cartBadge.isElementPresent(5)
+        return cartBadge.isElementPresent(PRESENCE_TIMEOUT_SECONDS)
                 ? cartBadge.getText().trim().equals(String.valueOf(expectedCount))
                 : expectedCount == 0;
     }

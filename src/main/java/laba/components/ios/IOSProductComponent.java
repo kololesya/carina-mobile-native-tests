@@ -1,4 +1,4 @@
-package laba.components.android;
+package laba.components.ios;
 
 import java.math.*;
 
@@ -13,21 +13,21 @@ import static com.zebrunner.carina.utils.mobile.IMobileUtils.Direction.UP;
 import static laba.constants.ProjectConstants.SWIPE_DURATION;
 import static laba.constants.ProjectConstants.SWIPE_STEPS;
 
-public class AndroidProductComponent extends ProductComponent {
+public class IOSProductComponent extends ProductComponent {
 
-    @FindBy(xpath = ".//android.widget.TextView[@content-desc='test-Item title']")
+    @FindBy(xpath = ".//XCUIElementTypeStaticText[@name='test-Item title']")
     private ExtendedWebElement productName;
 
-    @FindBy(xpath = ".//android.widget.TextView[@content-desc='test-Price']")
+    @FindBy(xpath = ".//XCUIElementTypeStaticText[@name='test-Price']")
     private ExtendedWebElement productPrice;
 
-    @FindBy(xpath = ".//android.view.ViewGroup[@content-desc='test-ADD TO CART']")
+    @FindBy(xpath = ".//XCUIElementTypeButton[@name='test-ADD TO CART']")
     private ExtendedWebElement addToCartButton;
 
-    @FindBy(xpath = ".//android.view.ViewGroup[@content-desc='test-REMOVE']")
+    @FindBy(xpath = ".//XCUIElementTypeButton[@name='test-REMOVE']")
     private ExtendedWebElement removeButton;
 
-    public AndroidProductComponent(WebDriver driver, SearchContext searchContext) {
+    public IOSProductComponent(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 

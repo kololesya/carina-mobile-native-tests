@@ -1,4 +1,4 @@
-package laba.androidPages;
+package laba.pages.androidPages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -6,7 +6,7 @@ import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
-import laba.basePages.DrawingPageBase;
+import laba.pages.basePages.DrawingPageBase;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = DrawingPageBase.class)
 public class DrawingPageAndroid extends DrawingPageBase {

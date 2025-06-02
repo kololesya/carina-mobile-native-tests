@@ -1,4 +1,4 @@
-package laba.androidPages;
+package laba.pages.androidPages;
 
 import java.math.*;
 
@@ -7,10 +7,10 @@ import org.openqa.selenium.support.FindBy;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 
-import laba.basePages.ProductDetailsPageBase;
 import laba.components.android.AndroidFooterComponent;
 import laba.components.android.AndroidHeaderMenuComponent;
 import laba.model.Product;
+import laba.pages.basePages.ProductDetailsPageBase;
 import static com.zebrunner.carina.utils.mobile.IMobileUtils.Direction.UP;
 import static laba.constants.ProjectConstants.SWIPE_DURATION;
 import static laba.constants.ProjectConstants.SWIPE_STEPS;

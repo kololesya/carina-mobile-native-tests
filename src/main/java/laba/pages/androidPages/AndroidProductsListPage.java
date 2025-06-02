@@ -1,4 +1,4 @@
-package laba.androidPages;
+package laba.pages.androidPages;
 
 import java.math.*;
 import java.util.*;
@@ -10,16 +10,16 @@ import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
-import laba.basePages.DrawingPageBase;
-import laba.basePages.LoginPageBase;
-import laba.basePages.ProductDetailsPageBase;
-import laba.basePages.ProductsListPageBase;
 import laba.components.android.AndroidFooterComponent;
 import laba.components.android.AndroidHeaderMenuComponent;
 import laba.components.android.AndroidProductComponent;
 import laba.components.android.AndroidSideMenuComponent;
 import laba.constants.MenuButtons;
 import laba.model.Product;
+import laba.pages.basePages.DrawingPageBase;
+import laba.pages.basePages.LoginPageBase;
+import laba.pages.basePages.ProductDetailsPageBase;
+import laba.pages.basePages.ProductsListPageBase;
 import static laba.constants.ProjectConstants.MAX_SCROLL_ATTEMPTS;
 import static laba.constants.ProjectConstants.SWIPE_DURATION;
 import static laba.constants.ProjectConstants.SWIPE_STEPS;
@@ -96,7 +96,7 @@ public class AndroidProductsListPage extends ProductsListPageBase {
         }
         throw new IllegalStateException("Product not found for opening: " + productName);
     }
-    
+
     @Override
     public List<String> getAllProductNames() {
         return collectProductValues(AndroidProductComponent::getProductName);

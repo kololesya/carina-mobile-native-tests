@@ -1,16 +1,14 @@
 package services;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
-import laba.basePages.ProductsListPageBase;
 import laba.constants.SortType;
+import laba.pages.basePages.ProductsListPageBase;
 
 public class ProductSortingService {
     private final ProductsListPageBase productsPage;
 
-    public ProductSortingService (ProductsListPageBase productsPage) {
+    public ProductSortingService(ProductsListPageBase productsPage) {
         this.productsPage = productsPage;
     }
 
@@ -30,7 +28,7 @@ public class ProductSortingService {
         }
     }
 
-    private <T extends Comparable<T>> boolean isSortedProductList (List<T> list, SortType sortType) {
+    private <T extends Comparable<T>> boolean isSortedProductList(List<T> list, SortType sortType) {
         List<T> sorted = new ArrayList<>(list);
         switch (sortType) {
             case NAME_A_TO_Z:

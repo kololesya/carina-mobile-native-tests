@@ -1,4 +1,4 @@
-package laba.basePages;
+package laba.pages.basePages;
 
 import org.openqa.selenium.WebDriver;
 import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;

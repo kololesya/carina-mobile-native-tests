@@ -1,4 +1,4 @@
-package laba.androidPages;
+package laba.pages.androidPages;
 
 import java.util.*;
 
@@ -8,8 +8,6 @@ import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
-import laba.basePages.CartPageBase;
-import laba.basePages.CheckoutPageBase;
 import laba.components.android.AndroidCartItemComponent;
 import laba.components.android.AndroidFooterComponent;
 import laba.components.android.AndroidHeaderMenuComponent;
@@ -17,6 +15,8 @@ import laba.components.android.AndroidSideMenuComponent;
 import laba.components.common.FooterComponent;
 import laba.components.common.HeaderMenuComponent;
 import laba.components.common.SideMenuComponent;
+import laba.pages.basePages.CartPageBase;
+import laba.pages.basePages.CheckoutPageBase;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = CartPageBase.class)
 public class CartPageAndroid extends CartPageBase {

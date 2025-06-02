@@ -1,11 +1,11 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import laba.basePages.CartPageBase;
-import laba.basePages.CheckoutPageBase;
-import laba.basePages.OrderConfirmationPageBase;
-import laba.basePages.OverviewPageBase;
-import laba.basePages.ProductsListPageBase;
+import laba.pages.basePages.CartPageBase;
+import laba.pages.basePages.CheckoutPageBase;
+import laba.pages.basePages.OrderConfirmationPageBase;
+import laba.pages.basePages.OverviewPageBase;
+import laba.pages.basePages.ProductsListPageBase;
 import static laba.constants.ProjectConstants.FIRST_NAME;
 import static laba.constants.ProjectConstants.LAST_NAME;
 import static laba.constants.ProjectConstants.SAUCE_LABS_ONESIE;

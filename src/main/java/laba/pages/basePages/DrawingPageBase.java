@@ -1,11 +1,11 @@
-package laba.basePages;
+package laba.pages.basePages;
 
 import org.openqa.selenium.WebDriver;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
-import static laba.constants.ProjectConstants.IMAGE_PRESENCE_TIMEOUT_SECONDS;
+import static laba.constants.ProjectConstants.PRESENCE_TIMEOUT_SECONDS;
 
 public abstract class DrawingPageBase extends BasePage {
 
@@ -32,6 +32,6 @@ public abstract class DrawingPageBase extends BasePage {
     }
 
     public boolean isRectangleDrawn() {
-        return drawnImage.isElementPresent(IMAGE_PRESENCE_TIMEOUT_SECONDS);
+        return drawnImage.isElementPresent(PRESENCE_TIMEOUT_SECONDS);
     }
 }
