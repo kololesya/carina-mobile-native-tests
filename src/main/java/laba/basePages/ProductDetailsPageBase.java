@@ -12,17 +12,7 @@ public abstract class ProductDetailsPageBase extends BasePage {
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
     }
 
-    public abstract void addToCart();
-
-    public abstract void removeFromCart();
-
-    public abstract boolean isAddToCartVisible();
-
-    public abstract boolean isRemoveFromCartVisible();
-
     public abstract String getProductName();
-
-    public abstract String getPrice();
 
     public abstract Product mapToProduct();
 

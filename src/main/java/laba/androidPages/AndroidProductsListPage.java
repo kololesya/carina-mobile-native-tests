@@ -25,7 +25,7 @@ import static laba.constants.ProjectConstants.SWIPE_DURATION;
 import static laba.constants.ProjectConstants.SWIPE_STEPS;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = ProductsListPageBase.class)
-public class ProductsListPageAndroid extends ProductsListPageBase {
+public class AndroidProductsListPage extends ProductsListPageBase {
 
     @FindBy(xpath = "//*[@content-desc='test-Menu']/..")
     private AndroidHeaderMenuComponent headerMenu;
@@ -48,7 +48,7 @@ public class ProductsListPageAndroid extends ProductsListPageBase {
     @FindBy(xpath = "//*[@content-desc='test-Close']/..")
     private AndroidSideMenuComponent sideMenuContainer;
 
-    public ProductsListPageAndroid(WebDriver driver) {
+    public AndroidProductsListPage(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(title);
     }
@@ -85,19 +85,18 @@ public class ProductsListPageAndroid extends ProductsListPageBase {
     public ProductDetailsPageBase openProductByName(String productName) {
         int safetyCounter = MAX_SCROLL_ATTEMPTS;
         while (safetyCounter-- > 0) {
-            Optional<AndroidProductComponent> target = productListItems().stream()
-                    .filter(p -> p.getProductName().equalsIgnoreCase(productName))
-                    .findFirst();
-            if (target.isPresent()) {
-                target.get().clickOnProductName();
-                return initPage(getDriver(), ProductDetailsPageBase.class);
+            for (AndroidProductComponent product : productListItems()) {
+                if (product.getProductName().equalsIgnoreCase(productName)) {
+                    product.clickOnProductName();
+                    return initPage(getDriver(), ProductDetailsPageBase.class);
+                }
             }
             if (getFooter().isVisible()) break;
             swipeUpToFooter();
         }
         throw new IllegalStateException("Product not found for opening: " + productName);
     }
-
+    
     @Override
     public List<String> getAllProductNames() {
         return collectProductValues(AndroidProductComponent::getProductName);
