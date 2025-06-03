@@ -1,6 +1,7 @@
 package laba.constants;
 
 public enum MenuButtons {
+
     ALL_ITEMS("ALL ITEMS"),
     WEBVIEW("WEBVIEW"),
     QR_CODE_SCANNER("QR CODE SCANNER"),

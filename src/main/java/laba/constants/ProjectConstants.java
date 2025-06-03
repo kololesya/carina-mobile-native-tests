@@ -1,6 +1,7 @@
 package laba.constants;
 
 public class ProjectConstants {
+
     public static final String SAUCE_LABS_ONESIE = "Sauce Labs Onesie";
 
     public static final int EXPECTED_CART_BADGE_COUNT = 1;
@@ -17,4 +18,5 @@ public class ProjectConstants {
 
     public static final int SWIPE_STEPS = 2;
 
+    public static final int IMAGE_PRESENCE_TIMEOUT_SECONDS = 5;
 }
