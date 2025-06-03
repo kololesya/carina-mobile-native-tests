@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 
 import laba.components.common.HeaderMenuComponent;
-import laba.pages.iosPages.CartPageIOS;
+import laba.pages.ios.CartPageIOS;
 import static laba.constants.ProjectConstants.PRESENCE_TIMEOUT_SECONDS;
 
 public class IOSHeaderMenuComponent extends HeaderMenuComponent {
@@ -14,11 +14,11 @@ public class IOSHeaderMenuComponent extends HeaderMenuComponent {
     @FindBy(xpath = ".//XCUIElementTypeOther[@name='test-Cart']")
     private ExtendedWebElement cartIcon;
 
+    @FindBy(xpath = ".//XCUIElementTypeOther[@name='test-Cart']/XCUIElementTypeOther")
+    private ExtendedWebElement cartBadge;
+
     @FindBy(xpath = ".//XCUIElementTypeOther[@name='test-Menu']")
     private ExtendedWebElement menuButton;
-
-    @FindBy(xpath = "//XCUIElementTypeOther[@name='test-Cart']//XCUIElementTypeStaticText")
-    private ExtendedWebElement cartBadge;
 
     public IOSHeaderMenuComponent(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
