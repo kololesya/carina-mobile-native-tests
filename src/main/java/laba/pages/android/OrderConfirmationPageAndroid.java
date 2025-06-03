@@ -1,11 +1,11 @@
-package laba.pages.androidPages;
+package laba.pages.android;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 
-import laba.pages.basePages.OrderConfirmationPageBase;
+import laba.pages.base.OrderConfirmationPageBase;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = OrderConfirmationPageBase.class)
 public class OrderConfirmationPageAndroid extends OrderConfirmationPageBase {

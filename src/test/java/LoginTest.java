@@ -4,8 +4,8 @@ import org.testng.annotations.Test;
 
 import laba.model.User;
 import laba.model.UserRepository;
-import laba.pages.basePages.LoginPageBase;
-import laba.pages.basePages.ProductsListPageBase;
+import laba.pages.base.LoginPageBase;
+import laba.pages.base.ProductsListPageBase;
 import static laba.constants.ErrorMessages.INVALID_CREDENTIALS;
 import static laba.constants.ErrorMessages.PASSWORD_REQUIRED;
 import static laba.constants.ErrorMessages.USERNAME_REQUIRED;

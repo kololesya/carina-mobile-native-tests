@@ -1,4 +1,4 @@
-package laba.pages.androidPages;
+package laba.pages.android;
 
 import java.math.*;
 import java.util.*;
@@ -17,10 +17,10 @@ import laba.components.android.AndroidProductComponent;
 import laba.components.android.AndroidSideMenuComponent;
 import laba.constants.MenuButtons;
 import laba.model.Product;
-import laba.pages.basePages.DrawingPageBase;
-import laba.pages.basePages.LoginPageBase;
-import laba.pages.basePages.ProductDetailsPageBase;
-import laba.pages.basePages.ProductsListPageBase;
+import laba.pages.base.DrawingPageBase;
+import laba.pages.base.LoginPageBase;
+import laba.pages.base.ProductDetailsPageBase;
+import laba.pages.base.ProductsListPageBase;
 import static laba.constants.ProjectConstants.MAX_SCROLL_ATTEMPTS;
 import static laba.constants.ProjectConstants.SWIPE_DURATION;
 import static laba.constants.ProjectConstants.SWIPE_STEPS;

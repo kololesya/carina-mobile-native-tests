@@ -3,7 +3,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import laba.constants.SortType;
-import laba.pages.basePages.ProductsListPageBase;
+import laba.pages.base.ProductsListPageBase;
 import services.ProductSortingService;
 
 public class ProductSortingTest extends BaseTest {

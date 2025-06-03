@@ -1,8 +1,8 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import laba.pages.basePages.LoginPageBase;
-import laba.pages.basePages.ProductsListPageBase;
+import laba.pages.base.LoginPageBase;
+import laba.pages.base.ProductsListPageBase;
 
 public class LogoutTest extends BaseTest {
 

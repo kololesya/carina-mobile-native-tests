@@ -1,4 +1,4 @@
-package laba.pages.basePages;
+package laba.pages.base;
 
 import java.math.*;
 import java.util.*;

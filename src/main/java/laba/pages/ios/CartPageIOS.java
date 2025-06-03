@@ -1,4 +1,4 @@
-package laba.pages.iosPages;
+package laba.pages.ios;
 
 import java.util.*;
 
@@ -15,8 +15,8 @@ import laba.components.ios.IOSCartItemComponent;
 import laba.components.ios.IOSFooterComponent;
 import laba.components.ios.IOSHeaderMenuComponent;
 import laba.components.ios.IOSSideMenuComponent;
-import laba.pages.basePages.CartPageBase;
-import laba.pages.basePages.CheckoutPageBase;
+import laba.pages.base.CartPageBase;
+import laba.pages.base.CheckoutPageBase;
 
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = CartPageBase.class)
 public class CartPageIOS extends CartPageBase {

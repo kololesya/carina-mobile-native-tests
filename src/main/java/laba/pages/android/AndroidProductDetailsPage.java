@@ -1,4 +1,4 @@
-package laba.pages.androidPages;
+package laba.pages.android;
 
 import java.math.*;
 
@@ -10,7 +10,7 @@ import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import laba.components.android.AndroidFooterComponent;
 import laba.components.android.AndroidHeaderMenuComponent;
 import laba.model.Product;
-import laba.pages.basePages.ProductDetailsPageBase;
+import laba.pages.base.ProductDetailsPageBase;
 import static com.zebrunner.carina.utils.mobile.IMobileUtils.Direction.UP;
 import static laba.constants.ProjectConstants.SWIPE_DURATION;
 import static laba.constants.ProjectConstants.SWIPE_STEPS;

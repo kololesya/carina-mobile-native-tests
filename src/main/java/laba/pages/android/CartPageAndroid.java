@@ -1,4 +1,4 @@
-package laba.pages.androidPages;
+package laba.pages.android;
 
 import java.util.*;
 
@@ -15,8 +15,8 @@ import laba.components.android.AndroidSideMenuComponent;
 import laba.components.common.FooterComponent;
 import laba.components.common.HeaderMenuComponent;
 import laba.components.common.SideMenuComponent;
-import laba.pages.basePages.CartPageBase;
-import laba.pages.basePages.CheckoutPageBase;
+import laba.pages.base.CartPageBase;
+import laba.pages.base.CheckoutPageBase;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = CartPageBase.class)
 public class CartPageAndroid extends CartPageBase {

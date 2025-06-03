@@ -1,7 +1,7 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import laba.pages.basePages.ProductsListPageBase;
+import laba.pages.base.ProductsListPageBase;
 import static laba.constants.ProjectConstants.EXPECTED_CART_BADGE_COUNT;
 import static laba.constants.ProjectConstants.SAUCE_LABS_ONESIE;
 

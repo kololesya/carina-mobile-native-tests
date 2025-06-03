@@ -1,13 +1,13 @@
-package laba.pages.androidPages;
+package laba.pages.android;
 
 import org.openqa.selenium.WebDriver;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
-import laba.pages.basePages.CheckoutPageBase;
-import laba.pages.basePages.OverviewPageBase;
-import laba.pages.basePages.ProductsListPageBase;
+import laba.pages.base.CheckoutPageBase;
+import laba.pages.base.OverviewPageBase;
+import laba.pages.base.ProductsListPageBase;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = CheckoutPageBase.class)
 public class CheckoutPageAndroid extends CheckoutPageBase {

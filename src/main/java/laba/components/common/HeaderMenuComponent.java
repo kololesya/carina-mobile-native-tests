@@ -3,7 +3,7 @@ package laba.components.common;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 
-import laba.pages.basePages.CartPageBase;
+import laba.pages.base.CartPageBase;
 
 public abstract class HeaderMenuComponent extends AbstractComponent {
 

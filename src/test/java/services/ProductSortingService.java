@@ -4,7 +4,7 @@ import java.math.*;
 import java.util.*;
 
 import laba.constants.SortType;
-import laba.pages.basePages.ProductsListPageBase;
+import laba.pages.base.ProductsListPageBase;
 
 public class ProductSortingService {
     private final ProductsListPageBase productsPage;

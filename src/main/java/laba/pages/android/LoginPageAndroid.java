@@ -1,6 +1,4 @@
-package laba.pages.iosPages;
-
-import java.util.*;
+package laba.pages.android;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -8,12 +6,11 @@ import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
-import io.appium.java_client.AppiumDriver;
-import laba.pages.basePages.LoginPageBase;
-import laba.pages.basePages.ProductsListPageBase;
+import laba.pages.base.LoginPageBase;
+import laba.pages.base.ProductsListPageBase;
 
-@DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = LoginPageBase.class)
-public class LoginPageIOS extends LoginPageBase {
+@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = LoginPageBase.class)
+public class LoginPageAndroid extends LoginPageBase {
 
     @ExtendedFindBy(accessibilityId = "test-Username")
     private ExtendedWebElement usernameField;
@@ -24,18 +21,12 @@ public class LoginPageIOS extends LoginPageBase {
     @ExtendedFindBy(accessibilityId = "test-LOGIN")
     private ExtendedWebElement loginButton;
 
-    @FindBy(xpath = "//XCUIElementTypeStaticText[contains(@name, 'user') or contains(@name, 'required')]")
+    @FindBy(xpath = "//android.view.ViewGroup[@content-desc='test-Error message']/android.widget.TextView")
     private ExtendedWebElement errorMessageText;
 
-    public LoginPageIOS(WebDriver driver) {
+    public LoginPageAndroid(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(loginButton);
-    }
-
-    private static void typePassword(AppiumDriver driver, String password) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("text", password);
-        driver.executeScript("mobile: type", params);
     }
 
     @Override
@@ -46,13 +37,12 @@ public class LoginPageIOS extends LoginPageBase {
         return initPage(getDriver(), ProductsListPageBase.class);
     }
 
-    @Override
     public boolean isErrorMessagePresent() {
         return errorMessageText.isElementPresent();
     }
 
-    @Override
     public String getErrorMessageText() {
         return errorMessageText.getText();
     }
 }
+

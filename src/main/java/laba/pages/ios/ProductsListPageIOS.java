@@ -1,7 +1,8 @@
-package laba.pages.iosPages;
+package laba.pages.ios;
 
 import java.math.*;
 import java.util.*;
+import java.util.stream.*;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -15,15 +16,15 @@ import laba.components.ios.IOSProductComponent;
 import laba.components.ios.IOSSideMenuComponent;
 import laba.constants.MenuButtons;
 import laba.model.Product;
-import laba.pages.basePages.DrawingPageBase;
-import laba.pages.basePages.LoginPageBase;
-import laba.pages.basePages.ProductDetailsPageBase;
-import laba.pages.basePages.ProductsListPageBase;
+import laba.pages.base.DrawingPageBase;
+import laba.pages.base.LoginPageBase;
+import laba.pages.base.ProductDetailsPageBase;
+import laba.pages.base.ProductsListPageBase;
 
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = ProductsListPageBase.class)
 public class ProductsListPageIOS extends ProductsListPageBase {
 
-    @FindBy(xpath = "//XCUIElementTypeOther[@name='test-Menu']")
+    @FindBy(xpath = "//XCUIElementTypeOther[@name='1'][1]")
     private IOSHeaderMenuComponent headerMenu;
 
     @FindBy(xpath = "//XCUIElementTypeStaticText[@name='PRODUCTS']")
@@ -43,6 +44,9 @@ public class ProductsListPageIOS extends ProductsListPageBase {
 
     @FindBy(xpath = "//XCUIElementTypeOther[@name='%s']")
     private ExtendedWebElement sortOption;
+
+    @FindBy(xpath = "//XCUIElementTypeOther[@name='test-Cart']/XCUIElementTypeOther")
+    private ExtendedWebElement directCartBadge;
 
     public ProductsListPageIOS(WebDriver driver) {
         super(driver);
@@ -70,12 +74,10 @@ public class ProductsListPageIOS extends ProductsListPageBase {
     }
 
     @Override
-    public List<Double> getAllProductPrices() {
-        List<Double> prices = new ArrayList<>();
-        for (IOSProductComponent item : productList) {
-            prices.add(Double.parseDouble(item.getProductPrice().replaceAll("[^\\d.]", "")));
-        }
-        return prices;
+    public List<BigDecimal> getAllProductPrices() {
+        return productList.stream()
+                .map(IOSProductComponent::getProductPrice)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -143,8 +145,7 @@ public class ProductsListPageIOS extends ProductsListPageBase {
         return productList.stream().allMatch(p ->
                 p.getProductName() != null &&
                         !p.getProductName().isEmpty() &&
-                        new BigDecimal(p.getProductPrice().replaceAll("[^\\d.]", ""))
-                                .compareTo(BigDecimal.ZERO) > 0);
+                        p.getProductPrice().compareTo(BigDecimal.ZERO) > 0);
     }
 
     @Override

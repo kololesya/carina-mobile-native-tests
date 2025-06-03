@@ -1,4 +1,4 @@
-package laba.pages.androidPages;
+package laba.pages.ios;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -6,11 +6,11 @@ import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
-import laba.pages.basePages.LoginPageBase;
-import laba.pages.basePages.ProductsListPageBase;
+import laba.pages.base.LoginPageBase;
+import laba.pages.base.ProductsListPageBase;
 
-@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = LoginPageBase.class)
-public class LoginPageAndroid extends LoginPageBase {
+@DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = LoginPageBase.class)
+public class LoginPageIOS extends LoginPageBase {
 
     @ExtendedFindBy(accessibilityId = "test-Username")
     private ExtendedWebElement usernameField;
@@ -21,10 +21,10 @@ public class LoginPageAndroid extends LoginPageBase {
     @ExtendedFindBy(accessibilityId = "test-LOGIN")
     private ExtendedWebElement loginButton;
 
-    @FindBy(xpath = "//android.view.ViewGroup[@content-desc='test-Error message']/android.widget.TextView")
+    @FindBy(xpath = "//XCUIElementTypeStaticText[contains(@name, 'user') or contains(@name, 'required')]")
     private ExtendedWebElement errorMessageText;
 
-    public LoginPageAndroid(WebDriver driver) {
+    public LoginPageIOS(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(loginButton);
     }
@@ -37,12 +37,13 @@ public class LoginPageAndroid extends LoginPageBase {
         return initPage(getDriver(), ProductsListPageBase.class);
     }
 
+    @Override
     public boolean isErrorMessagePresent() {
         return errorMessageText.isElementPresent();
     }
 
+    @Override
     public String getErrorMessageText() {
         return errorMessageText.getText();
     }
 }
-

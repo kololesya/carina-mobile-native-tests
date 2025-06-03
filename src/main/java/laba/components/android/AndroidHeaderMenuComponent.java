@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 
 import laba.components.common.HeaderMenuComponent;
-import laba.pages.androidPages.CartPageAndroid;
+import laba.pages.android.CartPageAndroid;
 
 public class AndroidHeaderMenuComponent extends HeaderMenuComponent {
 
