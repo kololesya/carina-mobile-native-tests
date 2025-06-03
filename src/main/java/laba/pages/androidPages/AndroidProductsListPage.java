@@ -3,6 +3,7 @@ package laba.pages.androidPages;
 import java.math.*;
 import java.util.*;
 import java.util.function.*;
+import java.util.stream.*;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -103,14 +104,10 @@ public class AndroidProductsListPage extends ProductsListPageBase {
     }
 
     @Override
-    public List<Double> getAllProductPrices() {
-        return collectProductValues(pc ->
-                Double.parseDouble(
-                        pc.getProductPrice()
-                                .replaceAll("[^\\d.,]", "")
-                                .replace(",", ".")
-                )
-        );
+    public List<BigDecimal> getAllProductPrices() {
+        return androidProductComponentList.stream()
+                .map(AndroidProductComponent::getProductPrice)
+                .collect(Collectors.toList());
     }
 
     @Override

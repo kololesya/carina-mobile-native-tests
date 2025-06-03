@@ -1,17 +1,11 @@
 package laba.components.android;
 
-import java.math.*;
-
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 
 import laba.components.common.ProductComponent;
-import laba.model.Product;
-import static com.zebrunner.carina.utils.mobile.IMobileUtils.Direction.UP;
-import static laba.constants.ProjectConstants.SWIPE_DURATION;
-import static laba.constants.ProjectConstants.SWIPE_STEPS;
 
 public class AndroidProductComponent extends ProductComponent {
 
@@ -31,14 +25,14 @@ public class AndroidProductComponent extends ProductComponent {
         super(driver, searchContext);
     }
 
-    public String getProductName() {
-        swipe(productName, UP, SWIPE_STEPS, SWIPE_DURATION);
-        return productName.getText().trim();
+    @Override
+    protected ExtendedWebElement getProductNameElement() {
+        return productName;
     }
 
-    public String getProductPrice() {
-        swipe(productName, UP, SWIPE_STEPS, SWIPE_DURATION);
-        return productPrice.getText().trim();
+    @Override
+    protected ExtendedWebElement getProductPriceElement() {
+        return productPrice;
     }
 
     public void clickAddToCart() {
@@ -47,12 +41,6 @@ public class AndroidProductComponent extends ProductComponent {
 
     public void clickOnProductName() {
         productName.click();
-    }
-
-    public Product mapToProduct() {
-        String priceText = getProductPrice().replaceAll("[^\\d.,]", "").replace(",", ".");
-        BigDecimal price = new BigDecimal(priceText);
-        return new Product(getProductName(), price);
     }
 
     public boolean isRemoveButtonVisible() {

@@ -1,5 +1,6 @@
 package services;
 
+import java.math.*;
 import java.util.*;
 
 import laba.constants.SortType;
@@ -21,7 +22,7 @@ public class ProductSortingService {
                 return isSortedProductList(names, sortType);
             case PRICE_LOW_TO_HIGH:
             case PRICE_HIGH_TO_LOW:
-                List<Double> prices = productsPage.getAllProductPrices();
+                List<BigDecimal> prices = productsPage.getAllProductPrices();
                 return isSortedProductList(prices, sortType);
             default:
                 throw new IllegalArgumentException("Unexpected sort type: " + sortType);

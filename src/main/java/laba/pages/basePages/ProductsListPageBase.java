@@ -1,5 +1,6 @@
 package laba.pages.basePages;
 
+import java.math.*;
 import java.util.*;
 
 import org.openqa.selenium.WebDriver;
@@ -21,7 +22,7 @@ public abstract class ProductsListPageBase extends BasePage {
 
     public abstract List<String> getAllProductNames();
 
-    public abstract List<Double> getAllProductPrices();
+    public abstract List<BigDecimal> getAllProductPrices();
 
     public abstract FooterComponent getFooter();
 
