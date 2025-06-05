@@ -1,7 +1,6 @@
-package laba.pages.android;
+package laba.pages.ios;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.FindBy;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
@@ -9,19 +8,16 @@ import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 import laba.pages.base.DrawingPageBase;
 import static laba.constants.ProjectConstants.PRESENCE_TIMEOUT_SECONDS;
 
-@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = DrawingPageBase.class)
-public class DrawingPageAndroid extends DrawingPageBase {
+@DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = DrawingPageBase.class)
+public class DrawingPageIOS extends DrawingPageBase {
 
     @ExtendedFindBy(accessibilityId = "test-DRAWING-SCREEN")
     private ExtendedWebElement drawScreenContainer;
 
-    @FindBy(className = "android.webkit.WebView")
-    private ExtendedWebElement drawingCanvas;
-
-    @ExtendedFindBy(image = "img/red_filled_rectangle.png")
+    @ExtendedFindBy(image = "img/red_filled_rectangle_ios.png")
     private ExtendedWebElement drawnImage;
 
-    public DrawingPageAndroid(WebDriver driver) {
+    public DrawingPageIOS(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(drawScreenContainer);
     }
