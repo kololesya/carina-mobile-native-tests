@@ -2,15 +2,15 @@ package laba.components.ios;
 
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.FindBy;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
 import laba.components.common.CartItemComponent;
 
 public class IOSCartItemComponent extends CartItemComponent {
 
-    @FindBy(xpath = ".//XCUIElementTypeStaticText[contains(@name, 'Description')]")
-    private ExtendedWebElement title;
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-Description'`]/XCUIElementTypeStaticText[1]")
+    private ExtendedWebElement productTitle;
 
     public IOSCartItemComponent(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
@@ -18,6 +18,6 @@ public class IOSCartItemComponent extends CartItemComponent {
 
     @Override
     public String getProductName() {
-        return title.getText().trim();
+        return productTitle.getText().trim();
     }
 }

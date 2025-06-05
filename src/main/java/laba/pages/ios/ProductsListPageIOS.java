@@ -24,7 +24,7 @@ import laba.pages.base.ProductsListPageBase;
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = ProductsListPageBase.class)
 public class ProductsListPageIOS extends ProductsListPageBase {
 
-    @FindBy(xpath = "//XCUIElementTypeOther[@name='1'][1]")
+    @FindBy(xpath = "//XCUIElementTypeOther[@name='headerContainer']/..")
     private IOSHeaderMenuComponent headerMenu;
 
     @FindBy(xpath = "//XCUIElementTypeStaticText[@name='PRODUCTS']")
@@ -36,7 +36,7 @@ public class ProductsListPageIOS extends ProductsListPageBase {
     @FindBy(xpath = "//XCUIElementTypeStaticText[contains(@name, 'Sauce Labs. All Rights Reserved')]")
     private IOSFooterComponent footer;
 
-    @FindBy(xpath = "//XCUIElementTypeOther[@name='test-Close']")
+    @FindBy(xpath = "//XCUIElementTypeOther[@name='test-Close']/..")
     private IOSSideMenuComponent sideMenu;
 
     @ExtendedFindBy(accessibilityId = "test-Modal Selector Button")
@@ -44,9 +44,6 @@ public class ProductsListPageIOS extends ProductsListPageBase {
 
     @FindBy(xpath = "//XCUIElementTypeOther[@name='%s']")
     private ExtendedWebElement sortOption;
-
-    @FindBy(xpath = "//XCUIElementTypeOther[@name='test-Cart']/XCUIElementTypeOther")
-    private ExtendedWebElement directCartBadge;
 
     public ProductsListPageIOS(WebDriver driver) {
         super(driver);

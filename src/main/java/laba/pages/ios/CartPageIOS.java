@@ -21,19 +21,19 @@ import laba.pages.base.CheckoutPageBase;
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = CartPageBase.class)
 public class CartPageIOS extends CartPageBase {
 
-    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeButton[`label == 'CHECKOUT'`]")
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'CHECKOUT'`]")
     private ExtendedWebElement checkoutButton;
 
-    @FindBy(xpath = "//XCUIElementTypeOther[@name='test-Cart']")
+    @FindBy(xpath = "//XCUIElementTypeOther[@name='headerContainer']/..")
     private IOSHeaderMenuComponent headerMenu;
 
     @FindBy(xpath = "//XCUIElementTypeOther[contains(@name,'All Rights Reserved')]")
     private IOSFooterComponent footerContainer;
 
-    @FindBy(xpath = "//XCUIElementTypeOther[@name='test-Close']")
+    @FindBy(xpath = "//XCUIElementTypeOther[@name='test-Close']/..")
     private IOSSideMenuComponent sideMenuContainer;
 
-    @FindBy(xpath = "//XCUIElementTypeOther[@name='test-Item']")
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-Item'`]")
     private List<IOSCartItemComponent> productComponents;
 
     public CartPageIOS(WebDriver driver) {

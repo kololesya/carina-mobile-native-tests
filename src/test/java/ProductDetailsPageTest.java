@@ -25,6 +25,5 @@ public class ProductDetailsPageTest extends BaseTest {
         Assert.assertEquals(productFromDetails.getProductTitle(), product.getProductTitle(), "The name of the product doesn't match!");
         Assert.assertEquals(productFromDetails.getProductPrice(), product.getProductPrice(), "The price of the product doesn't match");
         Assert.assertTrue(detailsPage.isProductImageDisplayed(), "The image of the product doesn't exist");
-
     }
 }
