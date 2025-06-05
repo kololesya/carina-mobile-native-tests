@@ -1,8 +1,9 @@
-package laba.androidPages;
+package laba.pages.android;
 
 import java.math.*;
 import java.util.*;
 import java.util.function.*;
+import java.util.stream.*;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -10,16 +11,16 @@ import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
-import laba.basePages.DrawingPageBase;
-import laba.basePages.LoginPageBase;
-import laba.basePages.ProductDetailsPageBase;
-import laba.basePages.ProductsListPageBase;
 import laba.components.android.AndroidFooterComponent;
 import laba.components.android.AndroidHeaderMenuComponent;
 import laba.components.android.AndroidProductComponent;
 import laba.components.android.AndroidSideMenuComponent;
 import laba.constants.MenuButtons;
 import laba.model.Product;
+import laba.pages.base.DrawingPageBase;
+import laba.pages.base.LoginPageBase;
+import laba.pages.base.ProductDetailsPageBase;
+import laba.pages.base.ProductsListPageBase;
 import static laba.constants.ProjectConstants.MAX_SCROLL_ATTEMPTS;
 import static laba.constants.ProjectConstants.SWIPE_DURATION;
 import static laba.constants.ProjectConstants.SWIPE_STEPS;
@@ -96,21 +97,17 @@ public class AndroidProductsListPage extends ProductsListPageBase {
         }
         throw new IllegalStateException("Product not found for opening: " + productName);
     }
-    
+
     @Override
     public List<String> getAllProductNames() {
         return collectProductValues(AndroidProductComponent::getProductName);
     }
 
     @Override
-    public List<Double> getAllProductPrices() {
-        return collectProductValues(pc ->
-                Double.parseDouble(
-                        pc.getProductPrice()
-                                .replaceAll("[^\\d.,]", "")
-                                .replace(",", ".")
-                )
-        );
+    public List<BigDecimal> getAllProductPrices() {
+        return androidProductComponentList.stream()
+                .map(AndroidProductComponent::getProductPrice)
+                .collect(Collectors.toList());
     }
 
     @Override

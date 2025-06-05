@@ -1,19 +1,19 @@
-package laba.androidPages;
+package laba.pages.ios;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 
-import laba.basePages.OrderConfirmationPageBase;
+import laba.pages.base.OrderConfirmationPageBase;
 
-@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = OrderConfirmationPageBase.class)
-public class OrderConfirmationPageAndroid extends OrderConfirmationPageBase {
+@DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = OrderConfirmationPageBase.class)
+public class OrderConfirmationPageIOS extends OrderConfirmationPageBase {
 
-    @FindBy(xpath = "//android.widget.TextView[@text='THANK YOU FOR YOU ORDER']")
+    @FindBy(xpath = "//XCUIElementTypeStaticText[@name='THANK YOU FOR YOU ORDER']")
     private ExtendedWebElement orderCompleteMessage;
 
-    public OrderConfirmationPageAndroid(WebDriver driver) {
+    public OrderConfirmationPageIOS(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(orderCompleteMessage);
     }

@@ -1,16 +1,15 @@
 package services;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.math.*;
+import java.util.*;
 
-import laba.basePages.ProductsListPageBase;
 import laba.constants.SortType;
+import laba.pages.base.ProductsListPageBase;
 
 public class ProductSortingService {
     private final ProductsListPageBase productsPage;
 
-    public ProductSortingService (ProductsListPageBase productsPage) {
+    public ProductSortingService(ProductsListPageBase productsPage) {
         this.productsPage = productsPage;
     }
 
@@ -23,14 +22,14 @@ public class ProductSortingService {
                 return isSortedProductList(names, sortType);
             case PRICE_LOW_TO_HIGH:
             case PRICE_HIGH_TO_LOW:
-                List<Double> prices = productsPage.getAllProductPrices();
+                List<BigDecimal> prices = productsPage.getAllProductPrices();
                 return isSortedProductList(prices, sortType);
             default:
                 throw new IllegalArgumentException("Unexpected sort type: " + sortType);
         }
     }
 
-    private <T extends Comparable<T>> boolean isSortedProductList (List<T> list, SortType sortType) {
+    private <T extends Comparable<T>> boolean isSortedProductList(List<T> list, SortType sortType) {
         List<T> sorted = new ArrayList<>(list);
         switch (sortType) {
             case NAME_A_TO_Z:

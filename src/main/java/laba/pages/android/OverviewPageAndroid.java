@@ -1,4 +1,4 @@
-package laba.androidPages;
+package laba.pages.android;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -6,9 +6,9 @@ import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
-import laba.basePages.OrderConfirmationPageBase;
-import laba.basePages.OverviewPageBase;
 import laba.components.android.AndroidFooterComponent;
+import laba.pages.base.OrderConfirmationPageBase;
+import laba.pages.base.OverviewPageBase;
 import static laba.constants.ProjectConstants.SWIPE_DURATION;
 import static laba.constants.ProjectConstants.SWIPE_STEPS;
 

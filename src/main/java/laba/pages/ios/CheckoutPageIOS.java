@@ -1,33 +1,33 @@
-package laba.androidPages;
+package laba.pages.ios;
 
 import org.openqa.selenium.WebDriver;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
-import laba.basePages.CheckoutPageBase;
-import laba.basePages.OverviewPageBase;
-import laba.basePages.ProductsListPageBase;
+import laba.pages.base.CheckoutPageBase;
+import laba.pages.base.OverviewPageBase;
+import laba.pages.base.ProductsListPageBase;
 
-@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = CheckoutPageBase.class)
-public class CheckoutPageAndroid extends CheckoutPageBase {
+@DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = CheckoutPageBase.class)
+public class CheckoutPageIOS extends CheckoutPageBase {
 
-    @ExtendedFindBy(accessibilityId = "test-First Name")
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeTextField[`name == 'test-First Name'`]")
     private ExtendedWebElement firstNameField;
 
-    @ExtendedFindBy(accessibilityId = "test-Last Name")
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeTextField[`name == 'test-Last Name'`]")
     private ExtendedWebElement lastNameField;
 
-    @ExtendedFindBy(accessibilityId = "test-Zip/Postal Code")
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeTextField[`name == 'test-Zip/Postal Code'`]")
     private ExtendedWebElement zipCodeField;
 
-    @ExtendedFindBy(accessibilityId = "test-CONTINUE")
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-CONTINUE'`]")
     private ExtendedWebElement continueButton;
 
-    @ExtendedFindBy(accessibilityId = "test-CANCEL")
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-CANCEL'`]")
     private ExtendedWebElement cancelButton;
 
-    public CheckoutPageAndroid(WebDriver driver) {
+    public CheckoutPageIOS(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(continueButton);
     }
