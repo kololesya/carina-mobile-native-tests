@@ -56,7 +56,6 @@ public class ProductDetailsPageIOS extends ProductDetailsPageBase {
     public Product mapToProduct() {
         String name = getProductName();
         BigDecimal price = extractPrice(productPrice.getText());
-        System.out.println(price);
         return new Product(name, price);
     }
 
