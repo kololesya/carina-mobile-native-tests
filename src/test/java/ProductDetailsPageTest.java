@@ -1,5 +1,6 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import laba.model.Product;
 import laba.pages.base.ProductDetailsPageBase;
@@ -22,8 +23,25 @@ public class ProductDetailsPageTest extends BaseTest {
         Product product = productsPage.getProductFromListByName(SAUCE_LABS_ONESIE);
         ProductDetailsPageBase detailsPage = productsPage.openProductByName(SAUCE_LABS_ONESIE);
         Product productFromDetails = detailsPage.mapToProduct();
-        Assert.assertEquals(productFromDetails.getProductTitle(), product.getProductTitle(), "The name of the product doesn't match!");
-        Assert.assertEquals(productFromDetails.getProductPrice(), product.getProductPrice(), "The price of the product doesn't match");
-        Assert.assertTrue(detailsPage.isProductImageDisplayed(), "The image of the product doesn't exist");
+        SoftAssert softAssert = new SoftAssert();
+
+        softAssert.assertEquals(
+                productFromDetails.getProductTitle(),
+                product.getProductTitle(),
+                "The name of the product doesn't match!"
+        );
+
+        softAssert.assertEquals(
+                productFromDetails.getProductPrice(),
+                product.getProductPrice(),
+                "The price of the product doesn't match"
+        );
+
+        softAssert.assertTrue(
+                detailsPage.isProductImageDisplayed(),
+                "The image of the product doesn't exist"
+        );
+
+        softAssert.assertAll();
     }
 }

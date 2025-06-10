@@ -164,7 +164,7 @@ public class AndroidProductsListPage extends ProductsListPageBase {
             if (getFooter().isVisible()) break;
             swipeUpToFooter();
         }
-        throw new NoSuchElementException("Товар не найден на главной странице: " + productName);
+        throw new NoSuchElementException("Product not found: " + productName);
     }
 
     @Override

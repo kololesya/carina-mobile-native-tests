@@ -22,7 +22,7 @@ public class OverviewPageAndroid extends OverviewPageBase {
     private ExtendedWebElement overviewTitle;
 
     @FindBy(xpath = "//android.widget.TextView[contains(@text, 'Sauce Labs. All Rights Reserved')]")
-    private AndroidFooterComponent footerContainer;
+    private AndroidFooterComponent footer;
 
     public OverviewPageAndroid(WebDriver driver) {
         super(driver);
@@ -37,7 +37,7 @@ public class OverviewPageAndroid extends OverviewPageBase {
     }
 
     public AndroidFooterComponent getFooter() {
-        return footerContainer;
+        return footer;
     }
 
     private void swipeUpToFooter() {

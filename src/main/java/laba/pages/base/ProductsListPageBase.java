@@ -4,7 +4,6 @@ import java.math.*;
 import java.util.*;
 
 import org.openqa.selenium.WebDriver;
-import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 
 import laba.components.common.FooterComponent;
 import laba.components.common.HeaderMenuComponent;
@@ -15,7 +14,6 @@ public abstract class ProductsListPageBase extends BasePage {
 
     public ProductsListPageBase(WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
     }
 
     public abstract ProductDetailsPageBase openProductByName(String productName);
