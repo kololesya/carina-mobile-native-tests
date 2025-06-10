@@ -9,11 +9,10 @@ import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 import laba.components.android.AndroidFooterComponent;
 import laba.pages.base.OrderConfirmationPageBase;
 import laba.pages.base.OverviewPageBase;
-import static laba.constants.ProjectConstants.SWIPE_DURATION;
-import static laba.constants.ProjectConstants.SWIPE_STEPS;
+import laba.utils.ISwipeToFooterUtils;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = OverviewPageBase.class)
-public class OverviewPageAndroid extends OverviewPageBase {
+public class OverviewPageAndroid extends OverviewPageBase implements ISwipeToFooterUtils {
 
     @ExtendedFindBy(accessibilityId = "test-FINISH")
     private ExtendedWebElement finishButton;
@@ -36,11 +35,8 @@ public class OverviewPageAndroid extends OverviewPageBase {
         return initPage(getDriver(), OrderConfirmationPageBase.class);
     }
 
+    @Override
     public AndroidFooterComponent getFooter() {
         return footer;
-    }
-
-    private void swipeUpToFooter() {
-        swipe(getFooter().getAllRightsReservedLabel(), Direction.UP, SWIPE_STEPS, SWIPE_DURATION);
     }
 }

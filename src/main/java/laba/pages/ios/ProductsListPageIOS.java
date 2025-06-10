@@ -51,6 +51,11 @@ public class ProductsListPageIOS extends ProductsListPageBase {
     }
 
     @Override
+    public IOSHeaderMenuComponent getHeaderMenu() {
+        return headerMenu;
+    }
+
+    @Override
     public ProductDetailsPageBase openProductByName(String productName) {
         for (IOSProductComponent product : productList) {
             if (product.getProductName().equalsIgnoreCase(productName)) {
@@ -85,11 +90,6 @@ public class ProductsListPageIOS extends ProductsListPageBase {
     @Override
     public IOSSideMenuComponent getSideMenu() {
         return sideMenu;
-    }
-
-    @Override
-    public IOSHeaderMenuComponent getHeaderMenu() {
-        return headerMenu;
     }
 
     @Override

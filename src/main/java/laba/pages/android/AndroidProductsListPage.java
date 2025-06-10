@@ -21,12 +21,11 @@ import laba.pages.base.DrawingPageBase;
 import laba.pages.base.LoginPageBase;
 import laba.pages.base.ProductDetailsPageBase;
 import laba.pages.base.ProductsListPageBase;
+import laba.utils.ISwipeToFooterUtils;
 import static laba.constants.ProjectConstants.MAX_SCROLL_ATTEMPTS;
-import static laba.constants.ProjectConstants.SWIPE_DURATION;
-import static laba.constants.ProjectConstants.SWIPE_STEPS;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = ProductsListPageBase.class)
-public class AndroidProductsListPage extends ProductsListPageBase {
+public class AndroidProductsListPage extends ProductsListPageBase implements ISwipeToFooterUtils {
 
     @FindBy(xpath = "//*[@content-desc='test-Menu']/..")
     private AndroidHeaderMenuComponent headerMenu;
@@ -54,6 +53,11 @@ public class AndroidProductsListPage extends ProductsListPageBase {
         setUiLoadedMarker(title);
     }
 
+    @Override
+    public AndroidHeaderMenuComponent getHeaderMenu() {
+        return headerMenu;
+    }
+
     public AndroidFooterComponent getFooter() {
         return footerContainer;
     }
@@ -64,10 +68,6 @@ public class AndroidProductsListPage extends ProductsListPageBase {
 
     public AndroidSideMenuComponent getSideMenu() {
         return sideMenuContainer;
-    }
-
-    public AndroidHeaderMenuComponent getHeaderMenu() {
-        return headerMenu;
     }
 
     @Override
@@ -193,10 +193,6 @@ public class AndroidProductsListPage extends ProductsListPageBase {
             swipeUpToFooter();
         }
         throw new IllegalStateException("Product not found after scrolling: " + productName);
-    }
-
-    private void swipeUpToFooter() {
-        swipe(getFooter().getAllRightsReservedLabel(), Direction.UP, SWIPE_STEPS, SWIPE_DURATION);
     }
 
     private <T> List<T> collectProductValues(Function<AndroidProductComponent, T> extractor) {
