@@ -31,7 +31,7 @@ public class IOSHeaderMenuComponent extends HeaderMenuComponent {
     @Override
     public CartPageBase clickCartIcon() {
         if (isUnstableDevice()) {
-            tapElementWithOffset(cartIcon, VERTICAL_OFFSET_PERCENT);
+            tapElementWithOffset(getDriver(), cartIcon, VERTICAL_OFFSET_PERCENT);
         } else {
             cartIcon.click();
         }
@@ -41,7 +41,7 @@ public class IOSHeaderMenuComponent extends HeaderMenuComponent {
     @Override
     public void openSideMenu() {
         if (isUnstableDevice()) {
-            tapElementWithOffset(menuButton, VERTICAL_OFFSET_PERCENT);
+            tapElementWithOffset(getDriver(), menuButton, VERTICAL_OFFSET_PERCENT);
         } else {
             menuButton.click();
         }

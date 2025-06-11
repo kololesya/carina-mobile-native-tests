@@ -10,8 +10,8 @@ import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
+import laba.components.ios.IHeaderMenuIOS;
 import laba.components.ios.IOSFooterComponent;
-import laba.components.ios.IOSHeaderMenuComponent;
 import laba.components.ios.IOSProductComponent;
 import laba.components.ios.IOSSideMenuComponent;
 import laba.constants.MenuButtons;
@@ -22,10 +22,7 @@ import laba.pages.base.ProductDetailsPageBase;
 import laba.pages.base.ProductsListPageBase;
 
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = ProductsListPageBase.class)
-public class ProductsListPageIOS extends ProductsListPageBase {
-
-    @FindBy(xpath = "//XCUIElementTypeOther[@name='headerContainer']/..")
-    private IOSHeaderMenuComponent headerMenu;
+public class ProductsListPageIOS extends ProductsListPageBase implements IHeaderMenuIOS {
 
     @FindBy(xpath = "//XCUIElementTypeStaticText[@name='PRODUCTS']")
     private ExtendedWebElement title;
@@ -48,11 +45,6 @@ public class ProductsListPageIOS extends ProductsListPageBase {
     public ProductsListPageIOS(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(title);
-    }
-
-    @Override
-    public IOSHeaderMenuComponent getHeaderMenu() {
-        return headerMenu;
     }
 
     @Override

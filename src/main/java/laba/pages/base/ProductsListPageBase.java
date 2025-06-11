@@ -6,11 +6,11 @@ import java.util.*;
 import org.openqa.selenium.WebDriver;
 
 import laba.components.common.FooterComponent;
-import laba.components.common.HeaderMenuComponent;
+import laba.components.common.IHeaderMenu;
 import laba.components.common.SideMenuComponent;
 import laba.model.Product;
 
-public abstract class ProductsListPageBase extends BasePage {
+public abstract class ProductsListPageBase extends BasePage implements IHeaderMenu {
 
     public ProductsListPageBase(WebDriver driver) {
         super(driver);
@@ -25,8 +25,6 @@ public abstract class ProductsListPageBase extends BasePage {
     public abstract FooterComponent getFooter();
 
     public abstract SideMenuComponent getSideMenu();
-
-    public abstract HeaderMenuComponent getHeaderMenu();
 
     public abstract Product getProductFromListByName(String productName);
 

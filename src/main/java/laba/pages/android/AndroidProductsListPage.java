@@ -12,9 +12,9 @@ import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
 import laba.components.android.AndroidFooterComponent;
-import laba.components.android.AndroidHeaderMenuComponent;
 import laba.components.android.AndroidProductComponent;
 import laba.components.android.AndroidSideMenuComponent;
+import laba.components.android.IHeaderMenuAndroid;
 import laba.constants.MenuButtons;
 import laba.model.Product;
 import laba.pages.base.DrawingPageBase;
@@ -25,10 +25,7 @@ import laba.utils.ISwipeToFooterUtils;
 import static laba.constants.ProjectConstants.MAX_SCROLL_ATTEMPTS;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = ProductsListPageBase.class)
-public class AndroidProductsListPage extends ProductsListPageBase implements ISwipeToFooterUtils {
-
-    @FindBy(xpath = "//*[@content-desc='test-Menu']/..")
-    private AndroidHeaderMenuComponent headerMenu;
+public class AndroidProductsListPage extends ProductsListPageBase implements ISwipeToFooterUtils, IHeaderMenuAndroid {
 
     @ExtendedFindBy(accessibilityId = "test-PRODUCTS")
     private ExtendedWebElement title;
@@ -51,11 +48,6 @@ public class AndroidProductsListPage extends ProductsListPageBase implements ISw
     public AndroidProductsListPage(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(title);
-    }
-
-    @Override
-    public AndroidHeaderMenuComponent getHeaderMenu() {
-        return headerMenu;
     }
 
     public AndroidFooterComponent getFooter() {

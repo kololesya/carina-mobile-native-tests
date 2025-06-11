@@ -5,13 +5,12 @@ import java.util.*;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.WebDriver;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-
-import static com.zebrunner.agent.core.webdriver.RemoteWebDriverFactory.getDriver;
 
 public class SearchElementUtil {
 
-    public static void tapElementWithOffset(ExtendedWebElement element, double verticalOffsetPercent) {
+    public static void tapElementWithOffset(WebDriver driver, ExtendedWebElement element, double verticalOffsetPercent) {
         Point location = element.getLocation();
         Dimension size = element.getSize();
         int x = location.getX() + size.getWidth() / 2;
@@ -20,6 +19,6 @@ public class SearchElementUtil {
         tapParams.put("x", x);
         tapParams.put("y", y);
         tapParams.put("duration", 100);
-        getDriver().executeScript("mobile: tap", tapParams);
+        ((JavascriptExecutor) driver).executeScript("mobile: tap", tapParams);
     }
 }
