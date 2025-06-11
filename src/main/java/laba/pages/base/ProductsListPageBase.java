@@ -22,8 +22,6 @@ public abstract class ProductsListPageBase extends BasePage implements IHeaderMe
 
     public abstract List<BigDecimal> getAllProductPrices();
 
-    //public abstract FooterComponent getFooter();
-
     public abstract SideMenuComponent getSideMenu();
 
     public abstract Product getProductFromListByName(String productName);

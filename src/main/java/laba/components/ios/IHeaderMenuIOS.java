@@ -2,14 +2,10 @@ package laba.components.ios;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
-import com.zebrunner.carina.utils.mobile.IMobileUtils;
-import com.zebrunner.carina.webdriver.decorator.ExtendedFieldDecorator;
-import com.zebrunner.carina.webdriver.locator.ExtendedElementLocatorFactory;
 
 import laba.components.common.IHeaderMenu;
 
-public interface IHeaderMenuIOS extends IHeaderMenu, IMobileUtils {
+public interface IHeaderMenuIOS extends IHeaderMenu {
 
     @Override
     default IOSHeaderMenuComponent getHeaderMenu() {
@@ -17,13 +13,6 @@ public interface IHeaderMenuIOS extends IHeaderMenu, IMobileUtils {
         WebElement headerRoot = getDriver().findElement(headerLocator);
         IOSHeaderMenuComponent header =
                 new IOSHeaderMenuComponent(getDriver(), headerRoot);
-        PageFactory.initElements(
-                new ExtendedFieldDecorator(
-                        new ExtendedElementLocatorFactory(getDriver(), headerRoot),
-                        getDriver()
-                ),
-                header
-        );
-        return header;
+        return initHeader(header, headerRoot);
     }
 }
