@@ -10,8 +10,8 @@ import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
+import laba.components.ios.IFooterIOS;
 import laba.components.ios.IHeaderMenuIOS;
-import laba.components.ios.IOSFooterComponent;
 import laba.components.ios.IOSProductComponent;
 import laba.components.ios.IOSSideMenuComponent;
 import laba.constants.MenuButtons;
@@ -22,16 +22,13 @@ import laba.pages.base.ProductDetailsPageBase;
 import laba.pages.base.ProductsListPageBase;
 
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = ProductsListPageBase.class)
-public class ProductsListPageIOS extends ProductsListPageBase implements IHeaderMenuIOS {
+public class ProductsListPageIOS extends ProductsListPageBase implements IHeaderMenuIOS, IFooterIOS {
 
     @FindBy(xpath = "//XCUIElementTypeStaticText[@name='PRODUCTS']")
     private ExtendedWebElement title;
 
     @FindBy(xpath = "//XCUIElementTypeOther[@name='test-Item']")
     private List<IOSProductComponent> productList;
-
-    @FindBy(xpath = "//XCUIElementTypeStaticText[contains(@name, 'Sauce Labs. All Rights Reserved')]")
-    private IOSFooterComponent footer;
 
     @FindBy(xpath = "//XCUIElementTypeOther[@name='test-Close']/..")
     private IOSSideMenuComponent sideMenu;
@@ -72,11 +69,6 @@ public class ProductsListPageIOS extends ProductsListPageBase implements IHeader
         return productList.stream()
                 .map(IOSProductComponent::getProductPrice)
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public IOSFooterComponent getFooter() {
-        return footer;
     }
 
     @Override

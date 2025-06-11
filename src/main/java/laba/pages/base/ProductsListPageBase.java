@@ -5,12 +5,12 @@ import java.util.*;
 
 import org.openqa.selenium.WebDriver;
 
-import laba.components.common.FooterComponent;
+import laba.components.common.IFooter;
 import laba.components.common.IHeaderMenu;
 import laba.components.common.SideMenuComponent;
 import laba.model.Product;
 
-public abstract class ProductsListPageBase extends BasePage implements IHeaderMenu {
+public abstract class ProductsListPageBase extends BasePage implements IHeaderMenu, IFooter {
 
     public ProductsListPageBase(WebDriver driver) {
         super(driver);
@@ -22,7 +22,7 @@ public abstract class ProductsListPageBase extends BasePage implements IHeaderMe
 
     public abstract List<BigDecimal> getAllProductPrices();
 
-    public abstract FooterComponent getFooter();
+    //public abstract FooterComponent getFooter();
 
     public abstract SideMenuComponent getSideMenu();
 

@@ -11,9 +11,9 @@ import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 
-import laba.components.android.AndroidFooterComponent;
 import laba.components.android.AndroidProductComponent;
 import laba.components.android.AndroidSideMenuComponent;
+import laba.components.android.IFooterAndroid;
 import laba.components.android.IHeaderMenuAndroid;
 import laba.constants.MenuButtons;
 import laba.model.Product;
@@ -25,7 +25,7 @@ import laba.utils.ISwipeToFooterUtils;
 import static laba.constants.ProjectConstants.MAX_SCROLL_ATTEMPTS;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = ProductsListPageBase.class)
-public class AndroidProductsListPage extends ProductsListPageBase implements ISwipeToFooterUtils, IHeaderMenuAndroid {
+public class AndroidProductsListPage extends ProductsListPageBase implements ISwipeToFooterUtils, IHeaderMenuAndroid, IFooterAndroid {
 
     @ExtendedFindBy(accessibilityId = "test-PRODUCTS")
     private ExtendedWebElement title;
@@ -39,19 +39,12 @@ public class AndroidProductsListPage extends ProductsListPageBase implements ISw
     @ExtendedFindBy(accessibilityId = "test-Item")
     private List<AndroidProductComponent> androidProductComponentList;
 
-    @FindBy(xpath = "//android.widget.TextView[contains(@text, 'Sauce Labs. All Rights Reserved')]")
-    private AndroidFooterComponent footerContainer;
-
     @FindBy(xpath = "//*[@content-desc='test-Close']/..")
     private AndroidSideMenuComponent sideMenuContainer;
 
     public AndroidProductsListPage(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(title);
-    }
-
-    public AndroidFooterComponent getFooter() {
-        return footerContainer;
     }
 
     public List<AndroidProductComponent> productListItems() {
