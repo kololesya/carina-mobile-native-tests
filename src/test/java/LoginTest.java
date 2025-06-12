@@ -2,18 +2,20 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import laba.basePages.LoginPageBase;
-import laba.basePages.ProductsListPageBase;
 import laba.model.User;
 import laba.model.UserRepository;
-
-import static laba.constants.ErrorMessages.*;
+import laba.pages.base.LoginPageBase;
+import laba.pages.base.ProductsListPageBase;
+import static laba.constants.ErrorMessages.INVALID_CREDENTIALS;
+import static laba.constants.ErrorMessages.PASSWORD_REQUIRED;
+import static laba.constants.ErrorMessages.USERNAME_REQUIRED;
+import static laba.constants.ErrorMessages.USER_LOCKED_OUT;
 
 public class LoginTest extends BaseTest {
 
     @DataProvider(name = "loginData")
     public Object[][] loginData() {
-        return new Object[][] {
+        return new Object[][]{
                 {UserRepository.getStandardUser(), true, ""},
                 {UserRepository.getLockedUser(), false, USER_LOCKED_OUT},
                 {UserRepository.getProblemUser(), true, ""},

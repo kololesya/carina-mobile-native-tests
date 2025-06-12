@@ -1,33 +1,28 @@
-package laba.basePages;
+package laba.pages.base;
 
+import java.math.*;
 import java.util.*;
 
 import org.openqa.selenium.WebDriver;
-import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 
-import laba.components.common.FooterComponent;
-import laba.components.common.HeaderMenuComponent;
+import laba.components.common.IFooter;
+import laba.components.common.IHeaderMenu;
 import laba.components.common.SideMenuComponent;
 import laba.model.Product;
 
-public abstract class ProductsListPageBase extends BasePage {
+public abstract class ProductsListPageBase extends BasePage implements IHeaderMenu, IFooter {
 
     public ProductsListPageBase(WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
     }
 
     public abstract ProductDetailsPageBase openProductByName(String productName);
 
     public abstract List<String> getAllProductNames();
 
-    public abstract List<Double> getAllProductPrices();
-
-    public abstract FooterComponent getFooter();
+    public abstract List<BigDecimal> getAllProductPrices();
 
     public abstract SideMenuComponent getSideMenu();
-
-    public abstract HeaderMenuComponent getHeaderMenu();
 
     public abstract Product getProductFromListByName(String productName);
 

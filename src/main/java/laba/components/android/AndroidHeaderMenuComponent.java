@@ -1,13 +1,12 @@
 package laba.components.android;
 
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
-
+import org.openqa.selenium.support.FindBy;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 
-import laba.androidPages.CartPageAndroid;
 import laba.components.common.HeaderMenuComponent;
+import laba.pages.android.CartPageAndroid;
 
 public class AndroidHeaderMenuComponent extends HeaderMenuComponent {
 
@@ -29,7 +28,7 @@ public class AndroidHeaderMenuComponent extends HeaderMenuComponent {
         return new CartPageAndroid(getDriver());
     }
 
-    public void openSideMenu () {
+    public void openSideMenu() {
         menuButton.click();
     }
 

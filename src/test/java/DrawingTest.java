@@ -1,8 +1,8 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import laba.basePages.DrawingPageBase;
-import laba.basePages.ProductsListPageBase;
+import laba.pages.base.DrawingPageBase;
+import laba.pages.base.ProductsListPageBase;
 
 public class DrawingTest extends BaseTest {
 

@@ -1,4 +1,4 @@
-package laba.androidPages;
+package laba.pages.android;
 
 import java.math.*;
 
@@ -7,10 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 
-import laba.basePages.ProductDetailsPageBase;
-import laba.components.android.AndroidFooterComponent;
-import laba.components.android.AndroidHeaderMenuComponent;
 import laba.model.Product;
+import laba.pages.base.ProductDetailsPageBase;
 import static com.zebrunner.carina.utils.mobile.IMobileUtils.Direction.UP;
 import static laba.constants.ProjectConstants.SWIPE_DURATION;
 import static laba.constants.ProjectConstants.SWIPE_STEPS;
@@ -24,12 +22,6 @@ public class AndroidProductDetailsPage extends ProductDetailsPageBase {
 
     @FindBy(xpath = "//android.widget.TextView[@text='Remove from Cart']")
     private ExtendedWebElement removeFromCartButton;
-
-    @FindBy(xpath = "//*[@content-desc='test-Menu']/..")
-    private AndroidHeaderMenuComponent headerMenu;
-
-    @FindBy(xpath = "//android.widget.TextView[contains(@text, 'Sauce Labs. All Rights Reserved')]")
-    private AndroidFooterComponent footerContainer;
 
     @FindBy(xpath = "//android.view.ViewGroup[@content-desc='test-BACK TO PRODUCTS']")
     private ExtendedWebElement backToProductsButton;
@@ -64,13 +56,5 @@ public class AndroidProductDetailsPage extends ProductDetailsPageBase {
     @Override
     public boolean isProductImageDisplayed() {
         return productImage.isElementPresent();
-    }
-
-    public AndroidHeaderMenuComponent getHeaderMenu() {
-        return headerMenu;
-    }
-
-    public AndroidFooterComponent getFooter() {
-        return footerContainer;
     }
 }

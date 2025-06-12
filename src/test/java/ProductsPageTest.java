@@ -1,15 +1,14 @@
-import laba.basePages.ProductsListPageBase;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import laba.pages.base.ProductsListPageBase;
 import static laba.constants.ProjectConstants.EXPECTED_CART_BADGE_COUNT;
 import static laba.constants.ProjectConstants.SAUCE_LABS_ONESIE;
 
 public class ProductsPageTest extends BaseTest {
 
     @Test
-    public void testProductListIsDisplayedAfterLogin () {
+    public void testProductListIsDisplayedAfterLogin() {
         ProductsListPageBase productsPage = loginAsStandardUser();
         Assert.assertTrue(productsPage.isPageOpened());
         Assert.assertTrue(
@@ -19,7 +18,7 @@ public class ProductsPageTest extends BaseTest {
     }
 
     @Test
-    public void testAddToCartButtonChangesToRemove () {
+    public void testAddToCartButtonChangesToRemove() {
         ProductsListPageBase productListPage = loginAsStandardUser();
         productListPage.addProductToCartByName(SAUCE_LABS_ONESIE);
         Assert.assertTrue(productListPage.getHeaderMenu().isCartBadgeWithCount(EXPECTED_CART_BADGE_COUNT),

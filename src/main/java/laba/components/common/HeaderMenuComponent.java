@@ -1,19 +1,19 @@
 package laba.components.common;
 
-import laba.androidPages.CartPageAndroid;
-
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 
+import laba.pages.base.CartPageBase;
+
 public abstract class HeaderMenuComponent extends AbstractComponent {
 
-    public HeaderMenuComponent (WebDriver driver, SearchContext searchContext) {
+    public HeaderMenuComponent(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
-    public abstract void openSideMenu ();
+    public abstract void openSideMenu();
 
-    public abstract CartPageAndroid clickCartIcon();
+    public abstract CartPageBase clickCartIcon();
 
     public abstract boolean isCartBadgeWithCount(int expectedCount);
 }
